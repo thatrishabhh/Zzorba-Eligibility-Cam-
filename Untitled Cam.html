@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>ZZORBA Eligibility + CAM + Lender Selector</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>
+        :root {
+            --brand: #004080;
+            --bg: linear-gradient(to right, #000000, #3533cd);
+            --danger: #c0392b;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--brand);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            background: #fff;
+            color: var(--brand);
+            height: 36px;
+            width: 60px;
+            text-align: center;
+            line-height: 36px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        header .center {
+            color: #ffeb3b;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            flex: 1;
+        }
+
+        header .right {
+            font-weight: 600;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        /* Container Styles */
+        .container {
+            max-width: 1120px;
+            margin: 16px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+        }
+
+        /* Typography */
+        h2 {
+            margin: 0 0 16px;
+            color: var(--brand);
+            font-size: 22px;
+            line-height: 1.3;
+        }
+
+        h3 {
+            margin: 16px 0 12px;
+            color: var(--brand);
+            font-size: 18px;
+            line-height: 1.4;
+        }
+
+        /* Form Elements */
+        label {
+            display: block;
+            margin-top: 12px;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 4px;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            transition: var(--transition);
+            background-color: #fff;
+            -webkit-appearance: none;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 32px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Table Styles - Mobile Optimized */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 16px 0;
+            border: 1px solid #e0e0e0;
+            border-radius: var(--border-radius);
+        }
+
+        table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #e0e0e0;
+            padding: 10px 8px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #f5f5f5;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        td input,
+        td select {
+            padding: 8px;
+            font-size: 14px;
+            min-width: 80px;
+        }
+
+        /* Mobile Table Hint */
+        .table-hint {
+            display: none;
+            padding: 8px;
+            background: #e3f2fd;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #1976d2;
+        }
+
+        /* Button Styles */
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: var(--transition);
+            touch-action: manipulation;
+            display: inline-block;
+            margin: 8px 8px 8px 0;
+        }
+
+        .btn-primary {
+            background: var(--brand);
+            color: #fff;
+        }
+
+        .btn-primary:hover,
+        .btn-primary:active {
+            background: #003060;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: #fff;
+            padding: 8px 12px;
+            font-size: 12px;
+        }
+
+        .btn-danger:hover,
+        .btn-danger:active {
+            background: #a02622;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+            margin: 16px 0;
+            padding: 14px;
+            font-size: 16px;
+        }
+
+        /* Results Section */
+        .results {
+            margin-top: 20px;
+            padding: 16px;
+            background: linear-gradient(135deg, #f0f9f4 0%, #e8f5e9 100%);
+            border: 2px solid #4caf50;
+            border-radius: var(--border-radius);
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .results h3 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+
+        .results div {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .results hr {
+            margin: 16px 0;
+            border: none;
+            border-top: 1px solid #c8e6c9;
+        }
+
+        /* Eligibility Cards */
+        .eligibility-cards {
+            display: grid;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .eligibility-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .eligibility-card h4 {
+            margin: 0 0 8px;
+            color: var(--brand);
+            font-size: 16px;
+        }
+
+        .eligibility-card .lenders {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .lender-tag {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Error Styles */
+        .error {
+            color: #d32f2f;
+            background: #ffebee;
+            padding: 12px;
+            border-radius: var(--border-radius);
+            margin: 12px 0;
+            border-left: 4px solid #d32f2f;
+            font-size: 14px;
+        }
+
+        /* Grid Layout */
+        .row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 12px 0;
+        }
+
+        /* Hint Text */
+        small.hint {
+            color: #666;
+            display: block;
+            margin-top: 8px;
+            font-weight: normal;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 576px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            .row {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+
+            .eligibility-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 24px;
+            }
+
+            header {
+                padding: 14px 24px;
+            }
+
+            header .logo {
+                width: 80px;
+                height: 40px;
+                line-height: 40px;
+                font-size: 16px;
+            }
+
+            header .center {
+                font-size: 20px;
+            }
+
+            header .right {
+                font-size: 14px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            h3 {
+                font-size: 20px;
+            }
+
+            label {
+                font-size: 15px;
+            }
+
+            .btn-block {
+                width: auto;
+                display: inline-block;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .table-hint {
+                display: block;
+            }
+
+            header .right {
+                display: none;
+            }
+
+            .container {
+                border-radius: 0;
+                margin: 0;
+                box-shadow: none;
+            }
+
+            .row {
+                grid-template-columns: 1fr !important;
+            }
+
+            .btn {
+                width: 100%;
+                margin: 8px 0;
+            }
+
+            th,
+            td {
+                padding: 8px 4px;
+                font-size: 12px;
+            }
+
+            td input,
+            td select {
+                min-width: 60px;
+                padding: 6px;
+                font-size: 12px;
+            }
+        }
+
+        /* Loading State */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--brand);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Touch-friendly spacing */
+        @media (pointer: coarse) {
+
+            input,
+            select,
+            .btn {
+                min-height: 44px;
+            }
+
+            .btn-danger {
+                min-height: 36px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo" aria-label="Company logo">LOGO</div>
+        <div class="center">ZZORBA</div>
+        <div class="right">INFO</div>
+    </header>
+
+    <div class="container">
+        <h2>Customer Eligibility + CAM Checker</h2>
+
+        <div id="errors" class="error" role="alert" aria-live="assertive" style="display:none;"></div>
+
+        <label for="customerType">Customer Type</label>
+        <select id="customerType" onchange="toggleCustomerFields()">
+            <option value="salaried">Salaried</option>
+            <option value="business">Business</option>
+        </select>
+
+        <div class="row">
+            <div>
+                <label for="custName">Customer Name</label>
+                <input type="text" id="custName" autocomplete="name" required>
+            </div>
+            <div>
+                <label for="custMobile">Mobile Number</label>
+                <input type="tel" id="custMobile" maxlength="10" pattern="[0-9]{10}" inputmode="numeric"
+                    placeholder="10-digit mobile" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div>
+                <label for="location">Location</label>
+                <input type="text" id="location" autocomplete="address-level2" required>
+            </div>
+            <div>
+                <label for="addrProof">Current Address Proof Type</label>
+                <select id="addrProof">
+                    <option>Aadhaar Card</option>
+                    <option>Rent Agreement</option>
+                    <option>Electricity Bill</option>
+                    <option>Passport</option>
+                    <option>Driving License</option>
+                </select>
+            </div>
+        </div>
+
+        <label for="addrDoc">Document Available?</label>
+        <select id="addrDoc">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+
+        <!-- Salaried -->
+        <div id="salariedFields">
+            <div class="row">
+                <div>
+                    <label for="companyCat">Company Category</label>
+                    <select id="companyCat" title="Company Category">
+                        <option value="S CAT A">SUPER CAT A</option>
+                        <option value="A">CAT A</option>
+                        <option value="B">CAT B</option>
+                        <option value="C">CAT C</option>
+                        <option value="D">CAT D</option>
+                        <option value="NONLISTED">NON-LISTED</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="salary">Net Monthly Salary (₹)</label>
+                    <input type="number" id="salary" min="35000" step="5000" placeholder="e.g., 45000">
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <label for="pfDed">PF Deduction</label>
+                    <select id="pfDed">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="tdsDed">TDS Deduction</label>
+                    <select id="tdsDed">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label for="foirAllowed">FOIR allowed (%)</label>
+                <input type="number" id="foirAllowed" min="45" max="80" step="5" value="50">
+                <small class="hint">Fixed Obligations to Income Ratio (45-80%)</small>
+            </div>
+        </div>
+
+        <!-- Business -->
+        <div id="businessFields" style="display:none;">
+            <div class="row">
+                <div>
+                    <label for="turnover">Annual Turnover (₹)</label>
+                    <input type="number" id="turnover" min="4000000" step="1000000" placeholder="e.g., 10000000">
+                </div>
+                <div>
+                    <label for="gst">Annual GST Paid (₹)</label>
+                    <input type="number" id="gst" min="0" step="50000" placeholder="e.g., 250000">
+                    <small class="hint">Enter 0 if no GST</small>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <label for="itr">ITR Filed?</label>
+                    <select id="itr">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="profit">Annual Net Profit (₹)</label>
+                    <input type="number" id="profit" min="400000" step="100000" placeholder="Annual amount">
+                </div>
+            </div>
+            <div>
+                <label for="license">Business License Available?</label>
+                <select id="license">
+                    <option value="yes">Yes - License Available</option>
+                    <option value="no">No - License Not Available</option>
+                </select>
+            </div>
+        </div>
+
+        <h3>Credit Facilities</h3>
+        <div class="table-hint">
+            📱 Swipe left/right to see all columns
+        </div>
+        <div class="table-container">
+            <table id="loanTable">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Obligated?</th>
+                        <th>Sanction</th>
+                        <th>Outstanding</th>
+                        <th>EMI</th>
+                        <th>Tenure</th>
+                        <th>Rate%</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="addLoanRow()">+ Add Loan</button>
+
+        <button class="btn btn-primary btn-block" onclick="submitAndCalculate()" id="submitBtn">
+            Calculate Eligibility
+        </button>
+
+        <div id="results" class="results" style="display:none;" aria-live="polite"></div>
+    </div>
+
+    <script>
+        /* ---------- Utilities ---------- */
+        function byId(id) { return document.getElementById(id); }
+        function toNum(v) { const n = parseFloat(v); return isNaN(n) ? 0 : n; }
+
+        /* ---------- UI Toggles ---------- */
+        function toggleCustomerFields() {
+            const type = byId('customerType').value;
+            const salaried = type === 'salaried';
+            byId('salariedFields').style.display = salaried ? 'block' : 'none';
+            byId('businessFields').style.display = salaried ? 'none' : 'block';
+        }
+
+        /* ---------- Loan rows ---------- */
+        function addLoanRow() {
+            const tbody = document.querySelector('#loanTable tbody');
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>
+                    <select>
+                        <option>Personal Loan</option>
+                        <option>Credit Card</option>
+                        <option>Business Loan</option>
+                        <option>Auto Loan</option>
+                        <option>Home Loan</option>
+                        <option>OD/CC</option>
+                    </select>
+                </td>
+                <td>
+                    <select>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </td>
+                <td><input type="number" step="100000" min="0" placeholder="Amount"></td>
+                <td><input type="number" step="50000" min="0" placeholder="Amount"></td>
+                <td><input type="number" step="1000" min="0" placeholder="Auto"></td>
+                <td><input type="number" step="12" min="1" placeholder="Months"></td>
+                <td><input type="number" step="0.5" min="0" placeholder="%"></td>
+                <td><button type="button" class="btn btn-danger" onclick="this.closest('tr').remove()">×</button></td>`;
+            tbody.appendChild(tr);
+
+            if (window.innerWidth <= 576) {
+                setTimeout(() => {
+                    tr.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            }
+        }
+
+        /* ---------- EMI calculator ---------- */
+        function calcEmi(p, annualRate, months) {
+            const r = (toNum(annualRate) / 100) / 12;
+            const n = parseInt(months, 10);
+            if (!p || !r || !n) return 0;
+            const pow = Math.pow(1 + r, n);
+            return p * r * pow / (pow - 1);
+        }
+
+        /* ---------- Validation ---------- */
+        function validateForm() {
+            const errors = [];
+            if (!byId('custName').value.trim()) errors.push('Please enter customer name.');
+            const mobile = byId('custMobile').value.trim();
+            if (!/^\d{10}$/.test(mobile) || !/^[6-9][0-9]{9}$/.test(mobile)) errors.push('Please enter a valid 10-digit mobile number.');
+            const type = byId('customerType').value;
+            if (type === 'salaried' && toNum(byId('salary').value) <= 0) errors.push('Please enter monthly salary.');
+            if (type === 'salaried' && (toNum(byId('foirAllowed').value) < 45 || toNum(byId('foirAllowed').value) > 80)) {
+                errors.push('FOIR allowed % should be between 45 and 80.');
+            }
+            if (type === 'business' && toNum(byId('turnover').value) <= 0) {
+                errors.push('Please enter annual turnover.');
+            }
+            return errors;
+        }
+
+        /* ---------- NEW COMPREHENSIVE LENDER LOGIC ---------- */
+
+        function getSalariedLenders(salary, pf, tds, companyCategory) {
+            const isPfTdsDeducted = (pf === "yes" || tds === "yes");
+            const results = {
+                personalLoan: { type: "Personal Loan", lenders: [] },
+                odLimit: { type: "OD Limit", lenders: [] }
+            };
+
+            // 1. Salary + PF-TDS Based Logic
+            if (!isPfTdsDeducted) {
+                if (salary < 45000) {
+                    results.personalLoan.lenders = ["Shriram Finance", "ABFL", "Flurtoon", "InCred"];
+                } else if (salary >= 50000 && salary <= 90000) {
+                    results.personalLoan.lenders = ["Bajaj", "Tata", "Chola", "Shriram Finance", "Flurtoon", "ABFL", "HDFC Bank"];
+                } else if (salary > 90000) {
+                    results.personalLoan.lenders = ["InCred", "HDFC", "ICICI", "Axis Finance", "Axis Bank", "Kotak", "IndusInd", "ABFL", "Bajaj", "Tata", "Chola", "Shriram Finance", "Flurtoon"];
+                }
+            } else {
+                // PF/TDS is deducted
+                if (salary >= 50000 && salary <= 90000) {
+                    results.odLimit.lenders = ["Bajaj", "Tata", "ABFL", "Kotak Mahindra Bank"];
+                }
+            }
+
+            // 2. Company Category + Salary Based Logic
+            const normCat = normalizeCompanyCategory(companyCategory);
+
+            // OD Limit based on Company Category
+            if (["S CAT A", "A", "B"].includes(normCat)) {
+                if (salary < 45000) {
+                    results.odLimit.lenders = mergeLenders(results.odLimit.lenders, ["Bajaj", "Tata"]);
+                }
+            }
+
+            if (["S CAT A", "A", "B", "C", "D"].includes(normCat)) {
+                if (salary < 85000) {
+                    results.odLimit.lenders = mergeLenders(results.odLimit.lenders, ["Bajaj", "Tata"]);
+                }
+            }
+
+            if (["S CAT A", "A", "B", "C"].includes(normCat)) {
+                if (salary >= 85000) {
+                    results.odLimit.lenders = mergeLenders(results.odLimit.lenders, ["Bajaj", "Tata", "Kotak"]);
+                }
+            }
+
+            // Personal Loan based on Company Category
+            if (["S CAT A", "A", "B", "C", "D"].includes(normCat)) {
+                if (salary < 45000) {
+                    results.personalLoan.lenders = mergeLenders(results.personalLoan.lenders, ["Bajaj", "Tata", "Chola"]);
+                } else if (salary >= 45000 && salary < 90000) {
+                    results.personalLoan.lenders = mergeLenders(results.personalLoan.lenders, ["Bajaj", "Tata", "Chola", "Axis Finance", "HDFC Bank", "ICICI", "Muthoot Finance"]);
+                } else if (salary >= 90000) {
+                    results.personalLoan.lenders = mergeLenders(results.personalLoan.lenders, ["Bajaj", "Tata", "Chola", "Axis Finance", "HDFC Bank", "ICICI", "Muthoot Finance", "Kotak"]);
+                }
+            }
+
+            return results;
+        }
+
+        function getBusinessLenders(turnover, gst, itr, license) {
+            const results = {
+                businessLoan: { type: "Business Loan", lenders: [] },
+                odLimit: { type: "OD Limit", lenders: [] }
+            };
+
+            const hasGst = gst > 0;
+            const hasItr = itr === "yes";
+            const hasLicense = license === "yes";
+
+            // Business Loan Eligibility
+            if (turnover >= 5000000 && turnover < 10000000) {
+                if (hasGst && hasItr) {
+                    results.businessLoan.lenders = ["Bajaj", "Tata", "Chola", "Indifie"];
+                } else if (!hasGst && hasItr && hasLicense) {
+                    results.businessLoan.lenders = ["Bajaj", "Tata", "Chola", "InCred", "Paycence", "Indifie"];
+                }
+            } else if (turnover >= 10000000) {
+                if (hasGst && hasItr) {
+                    results.businessLoan.lenders = ["Bajaj", "Tata", "Chola", "Indifie", "ABFL", "L&T", "Piramal", "Godrej", "Shriram Finance", "Lending Kart"];
+                } else if (!hasGst && hasItr && hasLicense) {
+                    results.businessLoan.lenders = ["Bajaj", "Tata", "Chola", "InCred", "Paycence", "ABFL", "L&T", "Godrej", "Shriram Finance", "Lending Kart", "Indifie"];
+                }
+            }
+
+            // OD Limit Eligibility
+            if (turnover >= 5000000 && turnover < 10000000) {
+                if ((hasGst && hasItr) || (!hasGst && hasItr && hasLicense)) {
+                    results.odLimit.lenders = ["Bajaj", "Tata"];
+                }
+            } else if (turnover >= 10000000) {
+                if (hasGst && hasItr) {
+                    results.odLimit.lenders = ["Bajaj", "Tata", "ABFL", "L&T", "Godrej"];
+                } else if (!hasGst && hasItr && hasLicense) {
+                    results.odLimit.lenders = ["Bajaj", "Tata", "ABFL", "L&T"];
+                }
+            }
+
+            return results;
+        }
+
+        function mergeLenders(existing, newLenders) {
+            const set = new Set([...existing, ...newLenders]);
+            return Array.from(set);
+        }
+
+        function normalizeCompanyCategory(raw) {
+            const v = (raw || '').toString().trim().toUpperCase();
+            if (v.includes('SUPER')) return 'S CAT A';
+            if (['S CAT A', 'A', 'B', 'C', 'D', 'NONLISTED'].includes(v)) return v;
+            return raw;
+        }
+
+        /* ---------- Submit & Calculate ---------- */
+        function submitAndCalculate() {
+            const errorBox = byId('errors');
+            const submitBtn = byId('submitBtn');
+
+            // Clear previous errors
+            errorBox.textContent = '';
+            errorBox.style.display = 'none';
+
+            // Validate form
+            const errors = validateForm();
+            if (errors.length) {
+                errorBox.innerHTML = errors.join('<br>');
+                errorBox.style.display = 'block';
+                byId('results').style.display = 'none';
+                errorBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                return;
+            }
+
+            // Show loading state
+            submitBtn.innerHTML = 'Calculating... <span class="loading"></span>';
+            submitBtn.disabled = true;
+
+            // Small delay for better UX
+            setTimeout(() => {
+                try {
+                    calculateResults();
+                } catch (error) {
+                    console.error('Calculation error:', error);
+                    errorBox.textContent = 'An error occurred during calculation. Please try again.';
+                    errorBox.style.display = 'block';
+                }
+
+                submitBtn.innerHTML = 'Calculate Eligibility';
+                submitBtn.disabled = false;
+            }, 500);
+        }
+
+        function calculateResults() {
+            const type = byId('customerType').value;
+
+            // Gather inputs
+            const salary = toNum(byId('salary').value);
+            const foirAllowed = toNum(byId('foirAllowed').value);
+            const turnover = toNum(byId('turnover').value);
+            const gstPaid = toNum(byId('gst').value);
+            const itrFlag = byId('itr') ? byId('itr').value : 'no';
+            const profitAnnual = toNum(byId('profit').value);
+            const license = byId('license') ? byId('license').value : 'no';
+
+            const pf = byId('pfDed') ? byId('pfDed').value : 'no';
+            const tds = byId('tdsDed') ? byId('tdsDed').value : 'no';
+            const companyCategory = byId('companyCat') ? byId('companyCat').value : '';
+
+            // Build loans array - FIXED: Proper cell access
+            const loans = [];
+            document.querySelectorAll('#loanTable tbody tr').forEach(row => {
+                const cells = row.cells;
+                if (cells.length >= 7) {
+                    const ltype = cells.querySelector('select').value;
+                    const obligated = cells.querySelector('select').value;
+                    const sanction = toNum(cells.querySelector('input').value);
+                    const os = toNum(cells.querySelector('input').value);
+                    let emi = toNum(cells.querySelector('input').value);
+                    const tenure = toNum(cells.querySelector('input').value);
+                    const rate = toNum(cells.querySelector('input').value);
+
+                    // Auto-calc EMI if blank
+                    if (!emi) {
+                        if (ltype === 'Credit Card' && os) {
+                            emi = os * 0.05;
+                        } else {
+                            const principal = os || sanction;
+                            const autoEmi = calcEmi(principal, rate, tenure);
+                            if (autoEmi) emi = autoEmi;
+                        }
+                    }
+                    loans.push({ type: ltype, obligated, sanction, os, emi, tenure, rate });
+                }
+            });
+
+            // Calculate eligibility
+            const totalObligationAll = loans.reduce((s, l) => s + (l.emi || 0), 0);
+
+            let allowedMonthly = 0;
+            if (type === 'salaried') {
+                allowedMonthly = salary * (foirAllowed / 100);
+            } else {
+                allowedMonthly = (turnover / 12) * 0.05;
+            }
+
+            let initialEligibility = (allowedMonthly - totalObligationAll) * 40;
+            if (!isFinite(initialEligibility) || initialEligibility < 0) initialEligibility = 0;
+
+            const nonOblOS = loans
+                .filter(l => (l.obligated || 'Yes') === 'No')
+                .reduce((s, l) => s + (l.os || 0), 0);
+
+            // Get lender results using new logic
+            let allResults;
+            if (type === "salaried") {
+                allResults = getSalariedLenders(salary, pf, tds, companyCategory);
+            } else {
+                allResults = getBusinessLenders(turnover, gstPaid, itrFlag, license);
+            }
+
+            // Bank suggestions based on amount
+            let banks = [];
+            if (initialEligibility >= 1500000) banks = ['HDFC', 'ICICI', 'Axis', 'Kotak'];
+            else if (initialEligibility >= 1000000) banks = ['Yes Bank', 'IndusInd', 'SBI'];
+            else if (initialEligibility >= 500000) banks = ['Bajaj', 'Tata', 'HeroFinCorp'];
+            else banks = ['Local NBFCs'];
+
+            // Display results
+            const res = byId('results');
+            res.style.display = 'block';
+            const addrWarn = (byId('addrDoc').value === 'no')
+                ? `<div class="error">⚠️ Address proof not available — may affect approval.</div>` : '';
+
+            // Build eligibility cards HTML
+            let eligibilityCards = '<div class="eligibility-cards">';
+
+            Object.values(allResults).forEach(result => {
+                if (result.lenders && result.lenders.length > 0) {
+                    eligibilityCards += `
+                        <div class="eligibility-card">
+                            <h4>${result.type}</h4>
+                            <div class="lenders">
+                                ${result.lenders.map(lender => `<span class="lender-tag">${lender}</span>`).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            if (Object.values(allResults).every(r => !r.lenders || r.lenders.length === 0)) {
+                eligibilityCards += `
+                    <div class="eligibility-card">
+                        <h4>Not Eligible</h4>
+                        <p style="color: #666; font-size: 14px;">Based on current parameters, no lenders are available.</p>
+                    </div>
+                `;
+            }
+
+            eligibilityCards += '</div>';
+
+            res.innerHTML = `
+                <h3>✅ Eligibility Results</h3>
+                ${eligibilityCards}
+                <hr>
+                <div><strong>Allowed Monthly:</strong> ₹${Math.round(allowedMonthly).toLocaleString()} 
+                    ${type === 'salaried' ? `<small>(FOIR ${foirAllowed}% of ₹${salary.toLocaleString()})</small>` : `<small>(5% of monthly turnover)</small>`}
+                </div>
+                <div><strong>Total EMI Obligations:</strong> ₹${Math.round(totalObligationAll).toLocaleString()}</div>
+                <div><strong>📊 Final Eligibility Amount:</strong> <span style="color: #2e7d32; font-size: 18px;">₹${Math.round(initialEligibility).toLocaleString()}</span></div>
+                <div><strong>Non-Obligated Outstanding:</strong> ₹${Math.round(nonOblOS).toLocaleString()}</div>
+                <div><strong>Suggested Banks (by amount):</strong> ${banks.join(', ')}</div>
+                <small class="hint">💡 Note: Credit Card EMI defaults to 5% of outstanding if not specified.</small>
+                ${addrWarn}
+            `;
+
+            // Scroll to results
+            res.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        /* ---------- Init ---------- */
+        document.addEventListener('DOMContentLoaded', () => {
+            addLoanRow();
+            toggleCustomerFields();
+
+            // Prevent form submission on Enter
+            document.querySelectorAll('input').forEach(input => {
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

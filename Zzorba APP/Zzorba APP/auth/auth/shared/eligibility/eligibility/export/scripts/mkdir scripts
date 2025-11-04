@@ -1,0 +1,1 @@
+Move-Item -Force "public\create-admin.mjs" "scripts\create-admin.mjs"

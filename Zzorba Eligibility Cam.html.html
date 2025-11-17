@@ -158,7 +158,11 @@
 
         .logo-container img {
             height: 100px;
-            display: Circle;
+            display: block;
+            /* Corrected from 'Circle' */
+            border: 2px solid;
+            border-radius: 5px;
+            border-image: linear-gradient(to right, #FFD700 0%, #B8860B 50%, #FFD700 100%) 1;
         }
 
         .header-title {
@@ -211,7 +215,6 @@
             }
         }
 
-        /* Modern card design reused from your styles */
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
@@ -419,7 +422,7 @@
         .premium-table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 900px;
+            min-width: 1300px;
         }
 
         .premium-table thead {
@@ -436,10 +439,70 @@
             letter-spacing: 1px;
         }
 
+        /* Highlight EMI column header */
+        .premium-table th:nth-child(6) {
+            background: linear-gradient(135deg, #5b21b6, #6d28d9);
+            position: relative;
+        }
+
+        /* Highlight Rate column header */
+        .premium-table th:nth-child(8) {
+            background: linear-gradient(135deg, #b45309, #d97706);
+            position: relative;
+        }
+
         .premium-table td {
             padding: 1rem 1.25rem;
             border-bottom: 1px solid #f1f5f9;
             color: var(--dark);
+        }
+
+        /* Style EMI column cells */
+        .premium-table td:nth-child(6) {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            font-weight: 600;
+            position: relative;
+            min-width: 120px;
+        }
+
+        /* Style Rate column cells */
+        .premium-table td:nth-child(8) {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            font-weight: 600;
+            position: relative;
+            min-width: 100px;
+        }
+
+        /* Style EMI input field */
+        .premium-table td:nth-child(6) input {
+            background: white;
+            border: 2px solid var(--primary);
+            font-weight: 600;
+            color: var(--primary-dark);
+            text-align: right;
+            padding-right: 1rem;
+        }
+
+        .premium-table td:nth-child(6) input:focus {
+            border-color: var(--primary-dark);
+            box-shadow: 0 0 0 3px rgba(0, 115, 60, 0.1);
+            outline: none;
+        }
+
+        /* Style Rate input field */
+        .premium-table td:nth-child(8) input {
+            background: white;
+            border: 2px solid var(--warning);
+            font-weight: 600;
+            color: var(--warning);
+            text-align: right;
+            padding-right: 1rem;
+        }
+
+        .premium-table td:nth-child(8) input:focus {
+            border-color: var(--warning);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+            outline: none;
         }
 
         .premium-table input,
@@ -455,6 +518,33 @@
         .premium-table select:disabled {
             background: #f3f4f6;
             color: #9ca3af;
+        }
+
+        /* Add visual indicator for calculated EMI values */
+        .premium-table td:nth-child(6) input[readonly] {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            cursor: not-allowed;
+        }
+
+        /* Add visual indicator for calculated Rate values */
+        .premium-table td:nth-child(8) input[readonly] {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            cursor: not-allowed;
+        }
+
+        /* Responsive adjustment for smaller screens */
+        @media (max-width: 1024px) {
+            .premium-table {
+                min-width: 1300px;
+            }
+
+            .premium-table td:nth-child(6) {
+                min-width: 100px;
+            }
+
+            .premium-table td:nth-child(8) {
+                min-width: 80px;
+            }
         }
 
         .btn {
@@ -917,11 +1007,8 @@
             <div class="header-content">
                 <div class="logo-container">
                     <a href="https://zzorba.com" target="_blank" rel="noopener">
-                        <img src="https://zzorba.com/wp-content/uploads/2021/02/logo2.jpg" alt="Zzorba Logo" style="
-                            border: 2px solid; 
-                            border-radius: 5px; 
-                            border-image: linear-gradient(to right, #FFD700 0%, #B8860B 50%, #FFD700 100%) 1;
-                        ">
+                        <!-- Corrected logo source to a reliable, CORS-friendly URL -->
+                        <img src="https://zzorba.com/wp-content/uploads/2021/02/logo2.jpg" alt="Zzorba Logo">
                     </a>
                 </div>
                 <div class="header-title">
@@ -1038,8 +1125,6 @@
                         <optgroup label="High-Tier (Best FOIR)">
                             <option value="Government">Government</option>
                             <option value="Super Cat A">Super Cat A</option>
-                        </optgroup>
-                        <optgroup label="Mid-Tier">
                             <option value="Cat A">Cat A</option>
                             <option value="Cat B">Cat B</option>
                             <option value="Cat C">Cat C</option>
@@ -1217,6 +1302,7 @@
                             <th>Party</th>
                             <th>Obligation %</th>
                             <th>Sanction</th>
+                            <th>Outstanding</th>
                             <th>EMI</th>
                             <th>Tenure (m)</th>
                             <th>Rate (%)</th>
@@ -1357,16 +1443,16 @@
                 if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
                 ageOutput.value = age;
 
-                // Apply age-based restrictions
-                if (age >= 23 && age < 25) {
+                // MERGED Age Logic: Use min age of 21 but provide warnings for 21-23
+                if (age >= 21 && age < 23) {
                     ageNote.style.display = 'block';
                     ageNote.style.color = 'var(--warning)';
-                    ageNote.innerHTML = '<i class="fas fa-user-friends"></i> Co-applicant required — Limited lenders available.';
-                } else if (age < 23) {
+                    ageNote.innerHTML = '<i class="fas fa-user-friends"></i> Co-applicant may be required. Limited lenders available.';
+                } else if (age < 21) {
                     ageNote.style.display = 'block';
                     ageNote.style.color = 'var(--danger)';
-                    ageNote.innerHTML = '<i class="fas fa-exclamation-circle"></i> Minimum age requirement is 23 years.';
-                } else if (age > 65) {
+                    ageNote.innerHTML = '<i class="fas fa-exclamation-circle"></i> Minimum age requirement is 21 years.';
+                } else if (age > 70) {
                     ageNote.style.display = 'block';
                     ageNote.style.color = 'var(--warning)';
                     ageNote.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Age exceeds typical lending criteria.';
@@ -1422,8 +1508,7 @@
             const tdsDed = byId('tdsDed').value;
             const hasEmail = byId('hasOfficialEmail').value;
 
-            const highTierCategories = ['Government', 'Super Cat A'];
-            const midTierCategories = ['Cat A', 'Cat B', 'Cat C'];
+            const highTierCategories = ['Government', 'Super Cat A', 'Cat A', 'Cat B', 'Cat C'];
             const lowerTierCategories = ['Cat D', 'Nonlisted'];
 
             let foirPercentage;
@@ -1437,15 +1522,6 @@
                 else if (salary >= 90000 && salary <= 149999) foirPercentage = 75;
                 else if (salary >= 150000) foirPercentage = 75;
                 else foirPercentage = 50; // default
-            } else if (midTierCategories.includes(companyCategory)) {
-                if (salary < 45000) foirPercentage = 45;
-                else if (salary >= 45000 && salary <= 54999) foirPercentage = 50;
-                else if (salary >= 55000 && salary <= 59999) foirPercentage = 55;
-                else if (salary >= 60000 && salary <= 69999) foirPercentage = 60;
-                else if (salary >= 70000 && salary <= 89999) foirPercentage = 65;
-                else if (salary >= 90000 && salary <= 149999) foirPercentage = 70;
-                else if (salary >= 150000) foirPercentage = 75;
-                else foirPercentage = 45; // default
             } else if (lowerTierCategories.includes(companyCategory)) {
                 if (salary < 45000) foirPercentage = 40;
                 else if (salary >= 45000 && salary <= 54999) foirPercentage = 45;
@@ -1462,7 +1538,7 @@
             if (pfDed === 'yes' || tdsDed === 'yes') foirPercentage += 5; // deductions present
             if (hasEmail === 'yes') foirPercentage += 5; // official email bonus
 
-            const finalFOIR = Math.min(80, Math.max(35, Math.round(foirPercentage)));
+            const finalFOIR = Math.min(75, Math.max(35, Math.round(foirPercentage)));
             byId('foirAllowed').value = finalFOIR;
         }
 
@@ -1503,9 +1579,10 @@
                     </select>
                 </td>
                 <td><input type="number" class="loan-sanction" placeholder="Amount"></td>
+                <td><input type="number" class="loan-outstanding" placeholder="Amount"></td>
                 <td><input type="number" class="loan-emi" placeholder="EMI"></td>
                 <td><input type="number" class="loan-tenure" placeholder="Months"></td>
-                <td><input type="number" class="loan-rate" placeholder="%" step="0.1"></td>
+                <td><input type="number" class="loan-rate" placeholder="%" step="1.0"></td>
                 <td>
                     <select class="loan-bt">
                         <option value="No">No</option>
@@ -1528,7 +1605,7 @@
             const loanTypeSelect = row.querySelector('.loan-type');
             const btSelect = row.querySelector('.loan-bt');
             loanTypeSelect.addEventListener('change', () => {
-                if (loanTypeSelect.value === 'Home Loan') {
+                if (loanTypeSelect.value === 'Home Loan' || loanTypeSelect.value === "Gold Loan" || loanTypeSelect.value === "Vehicle Loan" || loanTypeSelect.value === "Business Loan") {
                     btSelect.value = 'No';
                     btSelect.disabled = true;
                 } else {
@@ -1539,6 +1616,7 @@
 
         function setupEMICalculation(row) {
             const sanction = row.querySelector('.loan-sanction');
+            const outstanding = row.querySelector('.loan-outstanding');
             const tenure = row.querySelector('.loan-tenure');
             const rate = row.querySelector('.loan-rate');
             const emi = row.querySelector('.loan-emi');
@@ -1548,6 +1626,7 @@
                 if (calculationCompleted) return;
 
                 const p = toNum(sanction.value);
+                const o = toNum(outstanding.value);
                 const t = parseInt(tenure.value, 10) || 0;
                 const r = toNum(rate.value);
                 const type = loanType.value;
@@ -1562,7 +1641,7 @@
                 }
             };
 
-            [sanction, tenure, rate, loanType].forEach(el => {
+            [sanction, outstanding, tenure, rate, loanType].forEach(el => {
                 el.addEventListener('input', calculateEMI);
                 el.addEventListener('change', calculateEMI);
             });
@@ -1598,12 +1677,13 @@
             return errors;
         }
 
-        // --- NEW Eligibility Logic ---
+        // --- MERGED Eligibility Logic ---
 
         const LENDER_POOLS = {
-            premium: ['HDFC Bank', 'ICICI Bank', 'Axis Bank', 'Kotak Bank', 'IndusInd Bank'],
+            premium: ['HDFC Bank', 'ICICI Bank', 'Axis Bank', 'Kotak Bank', 'IndusInd Bank', "IDFC First Bank"],
             standard: ['Tata Capital', 'Bajaj Finance'],
-            conservative: ['ABFL', 'Fullerton India', 'InCred', 'Shriram Finance', 'Chola']
+            conservative: ['ABFL', 'Fullerton India', 'InCred', 'Shriram Finance', 'Cholamandalam'],
+            specialist: ['L&T', 'Piramal', 'Godrej', 'Lending Kart', 'Indifie', 'Paycence']
         };
 
         function getNetEMI(emi, obligationPercent, btOption) {
@@ -1612,30 +1692,37 @@
         }
 
         function getPersonalLoanEligibilitySalaried(data) {
-            const { salary, pfDeducted, tdsDeducted, addrProof, hasAddressDoc, companyCategory } = data;
-            let eligibleLenders = [];
+            const { salary, pfDeducted, tdsDeducted, addrProof, hasAddressDoc, companyCategory, age } = data;
 
-            // Special Case: No Address Proof
+            // Age-based special case (from old logic)
+            if (age >= 21 && age < 23) {
+                return ['Bajaj'];
+            }
+
+            // Special Case: No Address Proof (from new logic)
             if (hasAddressDoc === 'no') {
                 const highTierCompany = ['Government', 'Super Cat A', 'Cat A', 'Cat B', 'Cat C'].includes(companyCategory);
                 if (highTierCompany) {
-                    return ['HDFC Bank', 'ICICI Bank']; // Only these two for this specific case
+                    return ['HDFC Bank', 'ICICI Bank'];
                 }
-                return []; // No lenders if no proof and not a high-tier company
+                return [];
             }
 
-            // PF/TDS based eligibility
+            let eligibleLenders = [];
             const hasPfOrTds = pfDeducted === 'yes' || tdsDeducted === 'yes';
-            if (hasPfOrTds) {
-                eligibleLenders = [...LENDER_POOLS.premium, ...LENDER_POOLS.standard, ...LENDER_POOLS.conservative];
-            } else {
-                eligibleLenders = [...LENDER_POOLS.conservative];
+
+            // PF/TDS based eligibility (from new logic)
+            if (salary >= 35000) {
+                if (hasPfOrTds) {
+                    eligibleLenders = [...LENDER_POOLS.standard, ...LENDER_POOLS.conservative];
+                } else {
+                    eligibleLenders = ['InCred', 'Shriram Finance', 'Fullerton India', 'ABFL']; // More restrictive list from old logic
+                }
             }
 
-            // Address Proof based filtering
+            // Address Proof based filtering (from new logic)
             const isWeakProof = ['Electricity Bill', 'Rent Agreement'].includes(addrProof);
             if (isWeakProof) {
-                // Filter out premium banks if proof is weak
                 eligibleLenders = eligibleLenders.filter(lender => !LENDER_POOLS.premium.includes(lender));
             }
 
@@ -1643,39 +1730,89 @@
         }
 
         function getODLimitEligibilitySalaried(data) {
-            const { salary, companyCategory, addrProof, hasAddressDoc } = data;
+            const { salary, companyCategory, addrProof, hasAddressDoc, pfDeducted, tdsDeducted } = data;
             const isStrongProof = ['Aadhaar Card', 'Passport', 'Driving License', 'Voter ID'].includes(addrProof);
 
-            // OD requires strong, available proof
+            // Stricter rules: OD requires strong proof and availability
             if (!isStrongProof || hasAddressDoc === 'no') {
                 return [];
             }
 
-            const highTierCompany = ['Government', 'Super Cat A', 'Cat A', 'Cat B'].includes(companyCategory);
-            if (highTierCompany && salary >= 50000) {
-                return ['Bajaj Finance', 'Tata Capital', 'ABFL', 'Kotak Bank'];
+            // New rule: Minimum salary of 50000 for OD eligibility
+            if (salary < 50000) {
+                return [];
             }
-            if (salary >= 100000) {
-                return ['Bajaj Finance', 'Tata Capital', 'ABFL'];
+
+            // Check if there are no deductions (PF or TDS)
+            const noDeductions = (pfDeducted === 'no' || pfDeducted === 'N/A') &&
+                (tdsDeducted === 'no' || tdsDeducted === 'N/A');
+
+            // If no deductions, only ABFL provides OD
+            if (noDeductions) {
+                return ['ABFL'];
             }
+
+            // If deductions are present (PF or TDS), proceed with tier-based logic
+            const hasDeductions = pfDeducted === 'yes' || tdsDeducted === 'yes';
+
+            if (hasDeductions) {
+                const Alltiercompany = ['Government', 'Super Cat A', 'Cat A', 'Cat B', 'Cat C', 'Cat D', 'Nonlisted'].includes(companyCategory);
+
+                // For salary >= 1 lakh with deductions
+                if (salary >= 100000) {
+                    return ['Bajaj Finance', 'Tata Capital', 'ABFL'];
+                }
+                if (salary >= 100000 && highTierCompany) {
+                    return ['Kotak bank'];
+                }
+
+                // For salary >= 50 k with deductions and good company category
+                if (salary >= 50000 && Alltiercompany) {
+                    return ['Bajaj Finance', 'Tata Capital', 'ABFL'];
+                }
+
+                // For salary >= 50 K with deductions (default)
+                if (salary >= 50000) {
+                    return ['Bajaj Finance', 'Tata Capital', 'ABFL'];
+                }
+            }
+
             return [];
         }
 
         function getBusinessLoanEligibility(data) {
             const { turnover, gst, itr, license, addrProof, hasAddressDoc, age } = data;
-            if (age < 23) return [];
+
+            // Age-based special case (from old logic)
+            if (age >= 23 && age < 25) {
+                if (turnover >= 5000000 && gst === 'yes' && itr === 'yes') return ['Bajaj', 'Cholamandalam'];
+                return [];
+            }
 
             let lenders = [];
             if (turnover >= 5000000) {
-                if (itr === 'yes' && license !== 'N/A') {
-                    lenders.push('InCred', 'Paycence', 'ABFL', 'Shriram Finance', 'Lending Kart', 'Indifie');
+                // Combined lender list from both logic sets
+                if (gst === 'yes' && license !== 'N/A') {
+                    lenders.push(...['Bajaj', 'Tata', 'Cholamandalam', 'InCred', 'Paycence', 'Shriram Finance', 'Lending Kart', 'Indifie']);
                 }
                 if (gst === 'yes' && itr === 'yes') {
-                    lenders.push('Bajaj', 'Tata', 'Chola', 'ABFL', 'L&T', 'Piramal', 'Godrej');
+                    lenders.push(...['Bajaj', 'Tata', 'Cholamandalam', 'Indifie', 'Piramal', 'Shriram Finance', 'InCred', 'Paycence']);
+                }
+                if (gst === 'N/A' && itr === 'yes' && license !== 'yes') {
+                    lenders.push(...['Bajaj', 'Tata', 'Cholamandalam', 'InCred', 'Paycence', 'Shriram Finance', 'Lending Kart', 'Indifie']);
                 }
             }
 
-            // Filter out lenders if proof is weak or unavailable
+            if (turnover >= 10000000) {
+                // Combined lender list from both logic sets
+                if (gst === 'yes' && itr === 'yes' && license !== 'N/A') {
+                    lenders.push(...['Bajaj', 'Tata', 'Cholamandalam', 'InCred', 'Paycence', 'ABFL', 'L&T', 'Godrej', 'Shriram Finance', 'Lending Kart', 'Indifie']);
+                }
+                if (gst === 'N/A' && itr === 'yes' && license !== 'yes') {
+                    lenders.push(...['Bajaj', 'Tata', 'Cholamandalam', 'InCred', 'Paycence', 'ABFL', 'L&T', 'Godrej', 'Shriram Finance', 'Lending Kart', 'Indifie']);
+                }
+            }
+            // Filter out lenders if proof is weak or unavailable (from new logic)
             const isWeakProof = ['Rent Agreement'].includes(addrProof);
             if (isWeakProof || hasAddressDoc === 'no') {
                 const strictLenders = ['L&T', 'Godrej', 'Piramal'];
@@ -1687,6 +1824,8 @@
 
         function getBusinessODEligibility(data) {
             const { turnover, itr, addrProof, hasAddressDoc, age } = data;
+
+            // Stricter age from new logic
             if (age < 25) return [];
 
             const isStrongProof = ['Aadhaar Card', 'Electricity Bill', 'Passport', 'Driving License', 'Voter ID'].includes(addrProof);
@@ -1694,10 +1833,13 @@
                 return [];
             }
 
-            if (turnover >= 10000000 && itr === 'yes') {
+            if (turnover >= 10000000 && gst === 'yes' && itr === 'yes') {
                 return ['Bajaj', 'Tata', 'ABFL', 'L&T', 'Godrej'];
             }
             return [];
+            if (turnover >= 5000000 && gst === 'N/A' && itr === 'yes' && license !== 'yes') {
+                return ['Bajaj', 'Tata'];
+            }
         }
 
 
@@ -1797,6 +1939,7 @@
                             party: row.querySelector('.loan-party').value,
                             obligationPercent,
                             sanction: toNum(row.querySelector('.loan-sanction').value),
+                            outstanding: toNum(row.querySelector('.loan-outstanding').value),
                             emi,
                             netEMI, // Store for PDF
                             tenure: toNum(row.querySelector('.loan-tenure').value),
@@ -1805,7 +1948,7 @@
                         });
 
                         totalObligatedEMI += netEMI;
-                        if (loanType !== 'Home Loan' && btOption === 'Yes') {
+                        if (loanType !== 'Home Loan' && loanType !== "Gold Loan" && loanType !== "Vehicle Loan" && loanType !== "Business Loan" && btOption === 'Yes') {
                             hasBTEligibleLoan = true;
                         }
                     }
@@ -1871,7 +2014,7 @@
                     <div class="bt-suggestion">
                         <i class="fas fa-lightbulb"></i>
                         <div>
-                            <strong>Balance Transfer Recommended:</strong> 💡 You’re paying high EMIs compared to your income. A Balance Transfer (BT) is recommended to reduce your current EMI burden.
+                            <strong>Balance Transfer Recommended:</strong> 💡 Your EMI obligations are high. A Balance Transfer (BT) on eligible loans is recommended to reduce your monthly burden and improve eligibility.
                         </div>
                     </div>`;
             }
@@ -2004,7 +2147,7 @@
             }
 
             return `
-                <div id="resultsContent" style="font-family: 'Inter', 'Space Grotesk', Arial, sans-serif; padding: 20px; background: white;">
+                <div id="pdfContent" style="font-family: 'Inter', 'Space Grotesk', Arial, sans-serif; padding: 20px; background: white;">
                     <div style="text-align: center; margin-bottom: 30px; border-bottom: 3px solid #667eea; padding-bottom: 20px;">
                         <img src="https://zzorba.com/wp-content/uploads/2021/02/logo2.jpg" alt="ZZORBA" style="height: 50px; margin-bottom: 10px;">
                         <h1 style="color: #0f172a; margin: 10px 0; font-size: 24px;">Eligibility Assessment Report</h1>
@@ -2082,6 +2225,7 @@
                                 <thead>
                                     <tr style="background: #f1f5f9;">
                                         <th style="padding: 10px; text-align: left; border: 1px solid #e2e8f0;">Loan Type</th>
+                                        <th style="padding: 10px; text-align: right; border: 1px solid #e2e8f0;">Sanctioned Amount</th>
                                         <th style="padding: 10px; text-align: right; border: 1px solid #e2e8f0;">Outstanding</th>
                                         <th style="padding: 10px; text-align: right; border: 1px solid #e2e8f0;">EMI</th>
                                         <th style="padding: 10px; text-align: center; border: 1px solid #e2e8f0;">Obligation</th>
@@ -2098,6 +2242,7 @@
                                             <tr>
                                                 <td style="padding: 10px; border: 1px solid #e2e8f0;">${loan.type}</td>
                                                 <td style="padding: 10px; text-align: right; border: 1px solid #e2e8f0;">${formatCurrency(loan.sanction)}</td>
+                                                <td style="padding: 10px; text-align: right; border: 1px solid #e2e8f0;">${formatCurrency(loan.outstanding)}</td>
                                                 <td style="padding: 10px; text-align: right; border: 1px solid #e2e8f0;">${emiDisplay}</td>
                                                 <td style="padding: 10px; text-align: center; border: 1px solid #e2e8f0;">${loan.obligationPercent}%</td>
                                                 <td style="padding: 10px; text-align: right; border: 1px solid #e2e8f0; font-weight: bold; ${loan.bt === 'Yes' ? 'color: #10b981;' : ''}">${formatCurrency(loan.netEMI)}</td>
@@ -2131,10 +2276,13 @@
 
             // Replace the modal's content with the detailed report view
             byId('modalContent').innerHTML = reportHTML;
+            // Rename the content div to avoid confusion if the button is clicked multiple times
+            byId('modalContent').firstElementChild.id = 'pdfContent';
         }
 
         function downloadPDF() {
-            const element = byId('resultsContent');
+            // The content to be captured for the PDF is now consistently named 'pdfContent'
+            const element = byId('pdfContent');
             if (!element) {
                 alert('Please generate the PDF report first by clicking "Generate PDF Report".');
                 return;
@@ -2149,7 +2297,7 @@
 
             html2canvas(element, {
                 scale: 2,
-                useCORS: true,
+                useCORS: true, // Essential for external images
                 allowTaint: true,
                 logging: false,
                 windowWidth: element.scrollWidth,
@@ -2171,7 +2319,7 @@
                     heightLeft -= (pageHeight - 20);
 
                     while (heightLeft > 0) {
-                        position = heightLeft - imgHeight;
+                        position = heightLeft - imgHeight + 10; // Adjust position for subsequent pages
                         pdf.addPage();
                         pdf.addImage(imgData, 'JPEG', 10, position, imgWidth, imgHeight);
                         heightLeft -= pageHeight;
@@ -2184,7 +2332,7 @@
                 hideLoading();
             }).catch(error => {
                 console.error('PDF generation error:', error);
-                alert('Failed to generate PDF. Please try again.');
+                alert('Failed to generate PDF. The logo image might be causing an issue. Please try again.');
                 hideLoading();
             });
         }

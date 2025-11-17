@@ -4,18 +4,15 @@
 <head>
     <meta charset="UTF-8" />
     <title>Zzorba Financial Consultant Services</title>
-    <!-- Make it mobile-friendly -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Enhanced Fonts -->
+    <!-- Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-
     <!-- Icons & Animations -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-
     <!-- PDF Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -63,7 +60,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated Background Pattern */
         body::before {
             content: '';
             position: fixed;
@@ -95,7 +91,6 @@
             }
         }
 
-        /* Ultra-Wide Container */
         .main-wrapper {
             max-width: 1280px;
             margin: 0 auto;
@@ -103,7 +98,6 @@
             perspective: 1000px;
         }
 
-        /* Glassmorphic Header */
         .premium-header {
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
@@ -203,15 +197,14 @@
 
             0%,
             100% {
-                transform: translateY(0);
+                transform: translateY(0)
             }
 
             50% {
-                transform: translateY(-5px);
+                transform: translateY(-5px)
             }
         }
 
-        /* Modern card design reused from your styles */
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
@@ -419,7 +412,7 @@
         .premium-table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 900px;
+            min-width: 1000px;
         }
 
         .premium-table thead {
@@ -618,7 +611,6 @@
             background: linear-gradient(135deg, #f8fafc, #f1f5f9);
         }
 
-        /* Result Cards */
         .result-card {
             background: white;
             border-radius: 20px;
@@ -642,19 +634,16 @@
         .status-eligible {
             background: linear-gradient(135deg, #10b981, #34d399);
             color: white;
-            box-shadow: 0 5px 20px rgba(16, 185, 129, 0.3);
         }
 
         .status-review {
             background: linear-gradient(135deg, #f59e0b, #fbbf24);
             color: white;
-            box-shadow: 0 5px 20px rgba(245, 158, 11, 0.3);
         }
 
         .status-ineligible {
             background: linear-gradient(135deg, #ef4444, #f87171);
             color: white;
-            box-shadow: 0 5px 20px rgba(239, 68, 68, 0.3);
         }
 
         .bt-suggestion {
@@ -671,10 +660,6 @@
             font-size: 1rem;
         }
 
-        .bt-suggestion i {
-            font-size: 1.5rem;
-        }
-
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -687,7 +672,6 @@
             border-left: 5px solid var(--primary);
             border-radius: 15px;
             padding: 1.5rem;
-            transition: var(--transition-smooth);
         }
 
         .metric-label {
@@ -712,14 +696,13 @@
         }
 
         .lender-pill {
-            padding: 0.75rem 1.5rem;
+            padding: 0.5rem 1rem;
             background: linear-gradient(135deg, #ddd6fe, #c4b5fd);
             border: 2px solid #8b5cf6;
             color: #5b21b6;
             border-radius: 50px;
             font-weight: 600;
-            transition: var(--transition-smooth);
-            animation: fadeIn 0.5s ease backwards;
+            font-size: 0.9rem;
         }
 
         .loading-overlay {
@@ -802,7 +785,6 @@
             }
         }
 
-        /* Responsive */
         @media (max-width: 1024px) {
             .main-wrapper {
                 padding: 1.5rem;
@@ -836,10 +818,6 @@
 
             .header-title h1 {
                 font-size: 1.6rem;
-            }
-
-            .header-subtitle {
-                font-size: 0.9rem;
             }
 
             .type-selector-container {
@@ -917,25 +895,19 @@
             <div class="header-content">
                 <div class="logo-container">
                     <a href="https://zzorba.com" target="_blank" rel="noopener">
-                        <img src="https://zzorba.com/wp-content/uploads/2021/02/logo2.jpg" alt="Zzorba Logo" style="
-                            border: 2px solid; 
-                            border-radius: 5px; 
-                            border-image: linear-gradient(to right, #FFD700 0%, #B8860B 50%, #FFD700 100%) 1;
-                        ">
+                        <img src="https://zzorba.com/wp-content/uploads/2021/02/logo2.jpg" alt="Zzorba Logo"
+                            style="border: 2px solid; border-radius: 5px; border-image: linear-gradient(to right,#FFD700 0%,#B8860B 50%,#FFD700 100%) 1;">
                     </a>
                 </div>
                 <div class="header-title">
                     <h1 class="animate__animated animate__fadeIn">Zzorba Financial Consultant Services</h1>
-                    <p class="header-subtitle animate__animated animate__fadeIn animate__delay-2">
-                        Comprehensive Eligibility Assessment
-                    </p>
+                    <p class="header-subtitle animate__animated animate__fadeIn animate__delay-2">Comprehensive
+                        Eligibility Assessment</p>
                 </div>
                 <div class="version-badge animate__animated animate__bounceIn animate__delay-2s">
                     <i class="fas fa-info-circle"></i>
                     <a href="https://zzorba.com/contact-us/" target="_blank" rel="noopener"
-                        style="color: rgb(255, 255, 255); text-decoration: none;">
-                        <span>Info & Contact</span>
-                    </a>
+                        style="color:#fff; text-decoration:none;"><span>Info & Contact</span></a>
                 </div>
             </div>
         </header>
@@ -986,17 +958,14 @@
                     <label class="input-label"><i class="fas fa-user-tie"></i> Full Name</label>
                     <input type="text" id="custName" class="input-field" placeholder="Full name">
                 </div>
-
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-mobile-alt"></i> Mobile</label>
                     <input type="tel" id="custMobile" class="input-field" maxlength="10" placeholder="10-digit mobile">
                 </div>
-
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-envelope"></i> Email</label>
                     <input type="email" id="custEmail" class="input-field" placeholder="email@example.com">
                 </div>
-
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-map-marker-alt"></i> Location</label>
                     <input type="text" id="location" class="input-field" placeholder="City/Region">
@@ -1012,26 +981,22 @@
             </div>
 
             <div class="form-grid">
-                <!-- DOB for Salaried -->
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-birthday-cake"></i> Date of Birth</label>
                     <input type="date" id="dob" class="input-field" max="">
                     <div class="input-hint"><i class="fas fa-info-circle"></i> Select your DOB (cannot be in the future)
                     </div>
                 </div>
-
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-user-clock"></i> Age (calculated)</label>
                     <input type="number" id="calculatedAge" class="input-field auto-calculated" readonly>
                     <div id="ageNote" class="input-hint" style="display:none;"></div>
                 </div>
-
                 <div class="input-group">
                     <label class="input-label">₹ Net Monthly Salary</label>
                     <input type="number" id="salary" class="input-field" placeholder="50000" min="0">
                     <div class="input-hint"><i class="fas fa-info-circle"></i> Take-home salary</div>
                 </div>
-
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-sitemap"></i> Company Category</label>
                     <select id="companyCat" class="input-field">
@@ -1050,22 +1015,18 @@
                         </optgroup>
                     </select>
                 </div>
-
                 <div class="input-group">
                     <label class="input-label">% FOIR Allowed</label>
                     <input type="number" id="foirAllowed" class="input-field auto-calculated" readonly>
                 </div>
-
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-clock"></i> Job Tenure (months)</label>
                     <input type="number" id="jobTenure" class="input-field" min="0">
                 </div>
-
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-award"></i> Total Experience (years)</label>
                     <input type="number" id="totalExp" class="input-field" min="0">
                 </div>
-
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-piggy-bank"></i> PF Deduction</label>
                     <select id="pfDed" class="input-field">
@@ -1073,7 +1034,6 @@
                         <option value="no">No</option>
                     </select>
                 </div>
-
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-file-invoice-dollar"></i> TDS Deducted</label>
                     <select id="tdsDed" class="input-field">
@@ -1081,7 +1041,6 @@
                         <option value="yes">Yes</option>
                     </select>
                 </div>
-
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-at"></i> Official Email?</label>
                     <select id="hasOfficialEmail" class="input-field">
@@ -1100,30 +1059,25 @@
             </div>
 
             <div class="form-grid">
-                <!-- DOB for Business -->
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-birthday-cake"></i> Date of Birth</label>
                     <input type="date" id="dobBusiness" class="input-field" max="">
                     <div class="input-hint"><i class="fas fa-info-circle"></i> Select your DOB (cannot be in the future)
                     </div>
                 </div>
-
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-user-clock"></i> Age (calculated)</label>
                     <input type="number" id="calculatedAgeBusiness" class="input-field auto-calculated" readonly>
                     <div id="ageNoteBusiness" class="input-hint" style="display:none;"></div>
                 </div>
-
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-coins"></i> Annual Turnover</label>
                     <input type="number" id="turnover" class="input-field" min="0">
                 </div>
-
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-chart-pie"></i> Net Annual Profit</label>
                     <input type="number" id="profit" class="input-field" min="0">
                 </div>
-
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-receipt"></i> GST Registered?</label>
                     <select id="gst" class="input-field">
@@ -1131,7 +1085,6 @@
                         <option value="no">No</option>
                     </select>
                 </div>
-
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-file-alt"></i> ITR Filed?</label>
                     <select id="itr" class="input-field">
@@ -1139,7 +1092,6 @@
                         <option value="no">No</option>
                     </select>
                 </div>
-
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-certificate"></i> Business License</label>
                     <select id="license" class="input-field">
@@ -1170,11 +1122,10 @@
                         <option value="Passport">Passport</option>
                         <option value="Driving License">Driving License</option>
                         <option value="Voter ID">Voter ID</option>
-                        <option value="Electricity Bill">Electricity Bill (Weak)</option>
-                        <option value="Rent Agreement">Rent Agreement (Weak)</option>
+                        <option value="Electricity Bill (Weak)">Electricity Bill (Weak)</option>
+                        <option value="Rent Agreement (Weak)">Rent Agreement (Weak)</option>
                     </select>
                 </div>
-
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-check-circle"></i> Address Proof Available?</label>
                     <select id="addrDoc" class="input-field">
@@ -1182,7 +1133,6 @@
                         <option value="no">No (Special Case)</option>
                     </select>
                 </div>
-
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-hand-holding-usd"></i> Recent Funding (3m)</label>
                     <select id="recentFunding" class="input-field">
@@ -1190,7 +1140,6 @@
                         <option value="yes">Yes</option>
                     </select>
                 </div>
-
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-credit-card"></i> Live Unsecured Loans</label>
                     <select id="liveUnsecuredLoans" class="input-field">
@@ -1217,6 +1166,7 @@
                             <th>Party</th>
                             <th>Obligation %</th>
                             <th>Sanction</th>
+                            <th>Current Outstanding (POS)</th>
                             <th>EMI</th>
                             <th>Tenure (m)</th>
                             <th>Rate (%)</th>
@@ -1234,13 +1184,7 @@
             </div>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <!-- Floating Actions -->
+
     <div class="floating-actions">
         <button class="btn btn-primary" onclick="resetForm()">
             <i class="fas fa-redo"></i> Reset
@@ -1255,13 +1199,9 @@
         <div class="modal-container">
             <div class="modal-header">
                 <h2><i class="fas fa-chart-bar"></i> Comprehensive Assessment Report</h2>
-                <div>
-                    <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
-                </div>
+                <div><button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button></div>
             </div>
-            <div class="modal-body" id="modalContent">
-                <!-- dynamic -->
-            </div>
+            <div class="modal-body" id="modalContent"></div>
             <div class="modal-footer"
                 style="display:flex; gap:12px; justify-content:flex-end; padding:1rem 2rem; background:white;">
                 <button class="btn btn-primary" onclick="generateAndDisplayReport()"><i class="fas fa-file-pdf"></i>
@@ -1285,35 +1225,18 @@
         // Ensure jsPDF available
         window.jsPDF = window.jspdf && window.jspdf.jsPDF ? window.jspdf.jsPDF : null;
 
-        // Global state to prevent auto-calculation interference
         let calculationCompleted = false;
 
-        // Helper functions
-        function byId(id) {
-            return document.getElementById(id);
-        }
-
-        function toNum(v) {
-            return Number(String(v || '').replace(/[^0-9.\-]/g, '')) || 0;
-        }
-
-        function showLoading() {
-            byId('loadingOverlay').classList.add('active');
-        }
-
-        function hideLoading() {
-            byId('loadingOverlay').classList.remove('active');
-        }
-
+        // Helpers
+        function byId(id) { return document.getElementById(id); }
+        function toNum(v) { return Number(String(v || '').replace(/[^0-9.\-]/g, '')) || 0; }
+        function showLoading() { byId('loadingOverlay').classList.add('active'); }
+        function hideLoading() { byId('loadingOverlay').classList.remove('active'); }
         function formatCurrency(amount) {
-            return new Intl.NumberFormat('en-IN', {
-                style: 'currency',
-                currency: 'INR',
-                maximumFractionDigits: 0
-            }).format(amount || 0);
+            return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(amount || 0);
         }
+        const normProof = p => String(p || '').replace(' (Weak)', '').trim();
 
-        // Initialize on DOM load
         document.addEventListener('DOMContentLoaded', () => {
             setupEventListeners();
             addLoanRow();
@@ -1321,55 +1244,26 @@
             toggleCustomerFields();
         });
 
-        // Reusable DOB listener setup function
         function setupDOBListener(dobId, ageId, noteId) {
-            const dobInput = document.getElementById(dobId);
-            const ageOutput = document.getElementById(ageId);
-            const ageNote = document.getElementById(noteId);
-
+            const dobInput = byId(dobId), ageOutput = byId(ageId), ageNote = byId(noteId);
             if (!dobInput || !ageOutput || !ageNote) return;
-
-            // Set today's date as maximum selectable DOB
             const todayISO = new Date().toISOString().split('T')[0];
             dobInput.setAttribute('max', todayISO);
-
             dobInput.addEventListener('change', () => {
-                const dob = new Date(dobInput.value);
-                const today = new Date();
-
-                if (!dobInput.value) {
-                    ageOutput.value = '';
-                    ageNote.style.display = 'none';
-                    return;
-                }
-
-                if (dob > today) {
-                    ageNote.style.display = 'block';
-                    ageNote.style.color = 'var(--danger)';
-                    ageNote.innerHTML = '<i class="fas fa-exclamation-circle"></i> Invalid Date — cannot be in the future.';
-                    dobInput.value = '';
-                    ageOutput.value = '';
-                    return;
-                }
-
+                const dob = new Date(dobInput.value), today = new Date();
+                if (!dobInput.value) { ageOutput.value = ''; ageNote.style.display = 'none'; return; }
+                if (dob > today) { ageNote.style.display = 'block'; ageNote.style.color = 'var(--danger)'; ageNote.innerHTML = '<i class="fas fa-exclamation-circle"></i> Invalid Date — cannot be in the future.'; dobInput.value = ''; ageOutput.value = ''; return; }
                 let age = today.getFullYear() - dob.getFullYear();
                 const m = today.getMonth() - dob.getMonth();
                 if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
                 ageOutput.value = age;
 
-                // Apply age-based restrictions
                 if (age >= 23 && age < 25) {
-                    ageNote.style.display = 'block';
-                    ageNote.style.color = 'var(--warning)';
-                    ageNote.innerHTML = '<i class="fas fa-user-friends"></i> Co-applicant required — Limited lenders available.';
+                    ageNote.style.display = 'block'; ageNote.style.color = 'var(--warning)'; ageNote.innerHTML = '<i class="fas fa-user-friends"></i> Co-applicant may be required — limited lenders.';
                 } else if (age < 23) {
-                    ageNote.style.display = 'block';
-                    ageNote.style.color = 'var(--danger)';
-                    ageNote.innerHTML = '<i class="fas fa-exclamation-circle"></i> Minimum age requirement is 23 years.';
+                    ageNote.style.display = 'block'; ageNote.style.color = 'var(--danger)'; ageNote.innerHTML = '<i class="fas fa-exclamation-circle"></i> Minimum age requirement is 23 years.';
                 } else if (age > 65) {
-                    ageNote.style.display = 'block';
-                    ageNote.style.color = 'var(--warning)';
-                    ageNote.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Age exceeds typical lending criteria.';
+                    ageNote.style.display = 'block'; ageNote.style.color = 'var(--warning)'; ageNote.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Age exceeds typical lending criteria.';
                 } else {
                     ageNote.style.display = 'none';
                 }
@@ -1377,32 +1271,14 @@
         }
 
         function setupEventListeners() {
-            // Customer type toggle
-            document.querySelectorAll('input[name="customerType"]').forEach(r =>
-                r.addEventListener('change', () => {
-                    toggleCustomerFields();
-                    calculationCompleted = false; // Reset on type change
-                })
-            );
-
-            // FOIR calculation triggers
+            document.querySelectorAll('input[name="customerType"]').forEach(r => r.addEventListener('change', () => {
+                toggleCustomerFields(); calculationCompleted = false;
+            }));
             ['salary', 'companyCat', 'pfDed', 'tdsDed', 'hasOfficialEmail'].forEach(id => {
-                const el = byId(id);
-                if (el) {
-                    el.addEventListener('change', calculateFOIR);
-                    el.addEventListener('input', calculateFOIR);
-                }
+                const el = byId(id); if (el) { el.addEventListener('change', calculateFOIR); el.addEventListener('input', calculateFOIR); }
             });
-
-            // Mobile number validation
-            byId('custMobile').addEventListener('input', e => {
-                e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
-            });
-
-            // DOB and Age calculation for SALARIED
+            byId('custMobile').addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10); });
             setupDOBListener('dob', 'calculatedAge', 'ageNote');
-
-            // DOB and Age calculation for BUSINESS
             setupDOBListener('dobBusiness', 'calculatedAgeBusiness', 'ageNoteBusiness');
         }
 
@@ -1410,179 +1286,107 @@
             const type = document.querySelector('input[name="customerType"]:checked').value;
             byId('salariedSection').style.display = type === 'salaried' ? 'block' : 'none';
             byId('businessSection').style.display = type === 'business' ? 'block' : 'none';
-            if (type === 'salaried') {
-                calculateFOIR();
-            }
+            if (type === 'salaried') calculateFOIR();
         }
 
         function calculateFOIR() {
             const salary = toNum(byId('salary').value);
             const companyCategory = byId('companyCat').value;
-            const pfDed = byId('pfDed').value;
-            const tdsDed = byId('tdsDed').value;
-            const hasEmail = byId('hasOfficialEmail').value;
+            const pf = byId('pfDed').value, tds = byId('tdsDed').value, email = byId('hasOfficialEmail').value;
 
-            const highTierCategories = ['Government', 'Super Cat A'];
-            const midTierCategories = ['Cat A', 'Cat B', 'Cat C'];
-            const lowerTierCategories = ['Cat D', 'Nonlisted'];
+            const highT = ['Government', 'Super Cat A'];
+            const midT = ['Cat A', 'Cat B', 'Cat C'];
+            const lowT = ['Cat D', 'Nonlisted'];
+            let foir;
 
-            let foirPercentage;
-
-            if (highTierCategories.includes(companyCategory)) {
-                if (salary < 45000) foirPercentage = 50;
-                else if (salary >= 45000 && salary <= 54999) foirPercentage = 55;
-                else if (salary >= 55000 && salary <= 59999) foirPercentage = 60;
-                else if (salary >= 60000 && salary <= 69999) foirPercentage = 65;
-                else if (salary >= 70000 && salary <= 89999) foirPercentage = 70;
-                else if (salary >= 90000 && salary <= 149999) foirPercentage = 75;
-                else if (salary >= 150000) foirPercentage = 75;
-                else foirPercentage = 50; // default
-            } else if (midTierCategories.includes(companyCategory)) {
-                if (salary < 45000) foirPercentage = 45;
-                else if (salary >= 45000 && salary <= 54999) foirPercentage = 50;
-                else if (salary >= 55000 && salary <= 59999) foirPercentage = 55;
-                else if (salary >= 60000 && salary <= 69999) foirPercentage = 60;
-                else if (salary >= 70000 && salary <= 89999) foirPercentage = 65;
-                else if (salary >= 90000 && salary <= 149999) foirPercentage = 70;
-                else if (salary >= 150000) foirPercentage = 75;
-                else foirPercentage = 45; // default
-            } else if (lowerTierCategories.includes(companyCategory)) {
-                if (salary < 45000) foirPercentage = 40;
-                else if (salary >= 45000 && salary <= 54999) foirPercentage = 45;
-                else if (salary >= 55000 && salary <= 59999) foirPercentage = 50;
-                else if (salary >= 60000 && salary <= 89999) foirPercentage = 55;
-                else if (salary >= 90000 && salary <= 149999) foirPercentage = 60;
-                else if (salary >= 150000) foirPercentage = 65;
-                else foirPercentage = 40; // default
+            if (highT.includes(companyCategory)) {
+                if (salary < 45000) foir = 50;
+                else if (salary <= 54999) foir = 55;
+                else if (salary <= 59999) foir = 60;
+                else if (salary <= 69999) foir = 65;
+                else if (salary <= 89999) foir = 70;
+                else if (salary <= 149999) foir = 75;
+                else foir = 75;
+            } else if (midT.includes(companyCategory)) {
+                if (salary < 45000) foir = 45;
+                else if (salary <= 54999) foir = 50;
+                else if (salary <= 59999) foir = 55;
+                else if (salary <= 69999) foir = 60;
+                else if (salary <= 89999) foir = 65;
+                else if (salary <= 149999) foir = 70;
+                else foir = 75;
+            } else if (lowT.includes(companyCategory)) {
+                if (salary < 45000) foir = 40;
+                else if (salary <= 54999) foir = 45;
+                else if (salary <= 59999) foir = 50;
+                else if (salary <= 89999) foir = 55;
+                else if (salary <= 149999) foir = 60;
+                else foir = 65;
             } else {
-                foirPercentage = 45; // conservative default
+                foir = 45;
             }
 
-            // Add bonuses
-            if (pfDed === 'yes' || tdsDed === 'yes') foirPercentage += 5; // deductions present
-            if (hasEmail === 'yes') foirPercentage += 5; // official email bonus
+            if (pf === 'yes' || tds === 'yes') foir += 5;
+            if (email === 'yes') foir += 5;
 
-            const finalFOIR = Math.min(80, Math.max(35, Math.round(foirPercentage)));
-            byId('foirAllowed').value = finalFOIR;
+            byId('foirAllowed').value = Math.min(80, Math.max(35, Math.round(foir)));
         }
 
-        // Loan Table Management
-        const LOAN_TYPES = [
-            'Personal Loan',
-            'Home Loan',
-            'Vehicle Loan',
-            'Credit Card',
-            'Od Limit',
-            'Business Loan',
-            'Gold Loan',
-            'Other'
-        ];
+        const LOAN_TYPES = ['Personal Loan', 'Home Loan', 'Vehicle Loan', 'Credit Card', 'Od Limit', 'Business Loan', 'Gold Loan', 'Other'];
 
         function addLoanRow() {
             const tbody = document.querySelector('#loanTable tbody');
             const tr = document.createElement('tr');
             tr.style.animation = 'fadeIn 0.5s ease';
             tr.innerHTML = `
-                <td>
-                    <select class="loan-type">
-                        ${LOAN_TYPES.map(t => `<option value="${t}">${t}</option>`).join('')}
-                    </select>
-                </td>
-                <td>
-                    <select class="loan-party">
-                        <option value="Applicant">Applicant</option>
-                        <option value="Co-Applicant">Co-Applicant</option>
-                        <option value="Guarantor">Guarantor</option>
-                    </select>
-                </td>
-                <td>
-                    <select class="loan-obligation">
-                        <option value="100">100</option>
-                        <option value="50">50</option>
-                        <option value="0">0</option>
-                    </select>
-                </td>
-                <td><input type="number" class="loan-sanction" placeholder="Amount"></td>
+                <td><select class="loan-type">${LOAN_TYPES.map(t => `<option value="${t}">${t}</option>`).join('')}</select></td>
+                <td><select class="loan-party"><option value="Applicant">Applicant</option><option value="Co-Applicant">Co-Applicant</option><option value="Guarantor">Guarantor</option></select></td>
+                <td><select class="loan-obligation"><option value="100">100</option><option value="50">50</option><option value="0">0</option></select></td>
+                <td><input type="number" class="loan-sanction" placeholder="Sanction"></td>
+                <td><input type="number" class="loan-pos" placeholder="POS"></td>
                 <td><input type="number" class="loan-emi" placeholder="EMI"></td>
                 <td><input type="number" class="loan-tenure" placeholder="Months"></td>
-                <td><input type="number" class="loan-rate" placeholder="%" step="0.1"></td>
-                <td>
-                    <select class="loan-bt">
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
-                    </select>
-                </td>
-                <td>
-                    <button class="btn btn-danger" onclick="removeLoanRow(this)">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </td>
+                <td><input type="number" class="loan-rate" placeholder="%" step="1.0"></td>
+                <td><select class="loan-bt"><option value="No">No</option><option value="Yes">Yes</option></select></td>
+                <td><button class="btn btn-danger" onclick="removeLoanRow(this)"><i class="fas fa-trash"></i></button></td>
             `;
-
             tbody.appendChild(tr);
             setupEMICalculation(tr);
             setupLoanTypeListener(tr);
         }
 
         function setupLoanTypeListener(row) {
-            const loanTypeSelect = row.querySelector('.loan-type');
-            const btSelect = row.querySelector('.loan-bt');
-            loanTypeSelect.addEventListener('change', () => {
-                if (loanTypeSelect.value === 'Home Loan') {
-                    btSelect.value = 'No';
-                    btSelect.disabled = true;
-                } else {
-                    btSelect.disabled = false;
-                }
+            const typeSel = row.querySelector('.loan-type');
+            const btSel = row.querySelector('.loan-bt');
+            typeSel.addEventListener('change', () => {
+                if (typeSel.value === 'Home Loan') { btSel.value = 'No'; btSel.disabled = true; } else { btSel.disabled = false; }
             });
         }
 
         function setupEMICalculation(row) {
-            const sanction = row.querySelector('.loan-sanction');
-            const tenure = row.querySelector('.loan-tenure');
-            const rate = row.querySelector('.loan-rate');
-            const emi = row.querySelector('.loan-emi');
-            const loanType = row.querySelector('.loan-type');
-
-            const calculateEMI = () => {
+            const sanction = row.querySelector('.loan-sanction'), tenure = row.querySelector('.loan-tenure'), rate = row.querySelector('.loan-rate'), emi = row.querySelector('.loan-emi'), type = row.querySelector('.loan-type');
+            const calc = () => {
                 if (calculationCompleted) return;
-
-                const p = toNum(sanction.value);
-                const t = parseInt(tenure.value, 10) || 0;
-                const r = toNum(rate.value);
-                const type = loanType.value;
-
-                if (type === 'Credit Card') {
-                    if (p > 0) emi.value = Math.round(p * 0.05);
-                } else if (p > 0 && t > 0 && r > 0) {
-                    const monthlyRate = (r / 100) / 12;
-                    const pow = Math.pow(1 + monthlyRate, t);
-                    const calculatedEMI = (p * monthlyRate * pow) / (pow - 1);
-                    emi.value = Math.round(calculatedEMI);
+                const p = toNum(sanction.value), t = parseInt(tenure.value, 10) || 0, r = toNum(rate.value);
+                if (type.value === 'Credit Card') { if (p > 0) emi.value = Math.round(p * 0.05); }
+                else if (p > 0 && t > 0 && r > 0) {
+                    const m = (r / 100) / 12, pow = Math.pow(1 + m, t);
+                    emi.value = Math.round((p * m * pow) / (pow - 1));
                 }
             };
-
-            [sanction, tenure, rate, loanType].forEach(el => {
-                el.addEventListener('input', calculateEMI);
-                el.addEventListener('change', calculateEMI);
-            });
+            [sanction, tenure, rate, type].forEach(el => { el.addEventListener('input', calc); el.addEventListener('change', calc); });
         }
 
         function removeLoanRow(btn) {
             const tbody = document.querySelector('#loanTable tbody');
-            if (tbody.children.length > 1) {
-                btn.closest('tr').remove();
-            } else {
-                showError(['At least one loan row is required. You can leave it blank if there are no loans.']);
-            }
+            if (tbody.children.length > 1) { btn.closest('tr').remove(); }
+            else { showError(['At least one loan row is required. You can leave it blank if there are no loans.']); }
         }
 
-        // Validation Functions
         function validateForm() {
             const errors = [];
             if (!byId('custName').value.trim()) errors.push('Please enter customer name');
             if (!/^[6-9]\d{9}$/.test(byId('custMobile').value.trim())) errors.push('Please enter a valid 10-digit mobile number');
-
             const type = document.querySelector('input[name="customerType"]:checked').value;
             if (type === 'salaried') {
                 if (!byId('dob').value) errors.push('Please select date of birth for salaried profile');
@@ -1598,12 +1402,14 @@
             return errors;
         }
 
-        // --- NEW Eligibility Logic ---
-
-        const LENDER_POOLS = {
-            premium: ['HDFC Bank', 'ICICI Bank', 'Axis Bank', 'Kotak Bank', 'IndusInd Bank'],
-            standard: ['Tata Capital', 'Bajaj Finance'],
-            conservative: ['ABFL', 'Fullerton India', 'InCred', 'Shriram Finance', 'Chola']
+        /* ──── NEW / REVISED CONSTANTS ───────────────────────────────────────── */
+        const LENDERS = {
+            HDFC: 'HDFC Bank', ICICI: 'ICICI Bank', AXIS_BANK: 'Axis Bank', AXIS_FIN: 'Axis Finance',
+            KOTAK: 'Kotak Bank', KOTAK_MAH: 'Kotak Mahindra Bank', INDUSIND: 'IndusInd Bank',
+            BAJAJ: 'Bajaj Finance', TATA: 'Tata Capital', CHOLA: 'Chola', SHRIRAM: 'Shriram Finance',
+            FULLERTON: 'Fullerton India', ABFL: 'ABFL', INCRED: 'InCred', PAYCENCE: 'Paycence',
+            LENDING_KART: 'Lending Kart', INDIFIE: 'Indifie', LNT: 'L&T', PIRAMAL: 'Piramal',
+            GODREJ: 'Godrej', MUTHOOT: 'Muthoot Finance'
         };
 
         function getNetEMI(emi, obligationPercent, btOption) {
@@ -1611,121 +1417,145 @@
             return emi * (obligationPercent / 100);
         }
 
+        /* ──── 1. SALARIED – PERSONAL LOAN ─────────────────────────────────── */
         function getPersonalLoanEligibilitySalaried(data) {
-            const { salary, pfDeducted, tdsDeducted, addrProof, hasAddressDoc, companyCategory } = data;
-            let eligibleLenders = [];
+            const { salary, pfDeducted, tdsDeducted, companyCategory, addrProof, hasAddressDoc } = data;
+            const noPfTds = pfDeducted === 'no' && tdsDeducted === 'no';
+            const lenders = new Set();
+            const strongProof = ['Aadhaar Card', 'Passport', 'Driving License', 'Voter ID'].includes(normProof(addrProof)) && hasAddressDoc === 'yes';
 
-            // Special Case: No Address Proof
-            if (hasAddressDoc === 'no') {
-                const highTierCompany = ['Government', 'Super Cat A', 'Cat A', 'Cat B', 'Cat C'].includes(companyCategory);
-                if (highTierCompany) {
-                    return ['HDFC Bank', 'ICICI Bank']; // Only these two for this specific case
-                }
-                return []; // No lenders if no proof and not a high-tier company
+            // (A) Salary + PF/TDS
+            if (salary < 45000 && noPfTds) {
+                [LENDERS.SHRIRAM, LENDERS.ABFL, LENDERS.FULLERTON, LENDERS.INCRED].forEach(lenders.add, lenders);
+            } else if (salary >= 50000 && salary <= 90000 && noPfTds) {
+                [LENDERS.BAJAJ, LENDERS.TATA, LENDERS.CHOLA, LENDERS.SHRIRAM, LENDERS.FULLERTON, LENDERS.ABFL, LENDERS.HDFC].forEach(lenders.add, lenders);
+            } else if (salary > 90000 && noPfTds) {
+                [LENDERS.INCRED, LENDERS.HDFC, LENDERS.ICICI, LENDERS.AXIS_BANK, LENDERS.AXIS_FIN, LENDERS.KOTAK, LENDERS.INDUSIND, LENDERS.ABFL, LENDERS.BAJAJ, LENDERS.TATA, LENDERS.CHOLA, LENDERS.SHRIRAM, LENDERS.FULLERTON].forEach(lenders.add, lenders);
             }
 
-            // PF/TDS based eligibility
-            const hasPfOrTds = pfDeducted === 'yes' || tdsDeducted === 'yes';
-            if (hasPfOrTds) {
-                eligibleLenders = [...LENDER_POOLS.premium, ...LENDER_POOLS.standard, ...LENDER_POOLS.conservative];
-            } else {
-                eligibleLenders = [...LENDER_POOLS.conservative];
+            // (B) Company category + salary
+            const highCats = ['Super Cat A', 'Cat A', 'Cat B', 'Cat C'];
+            if (salary < 45000) {
+                [LENDERS.BAJAJ, LENDERS.TATA, LENDERS.CHOLA].forEach(lenders.add, lenders);
+            } else if (salary > 45000 && highCats.includes(companyCategory)) {
+                [LENDERS.BAJAJ, LENDERS.TATA, LENDERS.CHOLA, LENDERS.AXIS_FIN, LENDERS.HDFC, LENDERS.ICICI, LENDERS.MUTHOOT].forEach(lenders.add, lenders);
+                if (salary > 90000) lenders.add(LENDERS.KOTAK);
             }
 
-            // Address Proof based filtering
-            const isWeakProof = ['Electricity Bill', 'Rent Agreement'].includes(addrProof);
-            if (isWeakProof) {
-                // Filter out premium banks if proof is weak
-                eligibleLenders = eligibleLenders.filter(lender => !LENDER_POOLS.premium.includes(lender));
+            // (C) Proof filters (weak or no doc => remove premium)
+            const proof = normProof(addrProof);
+            if (hasAddressDoc !== 'yes' || ['Electricity Bill', 'Rent Agreement'].includes(proof)) {
+                [LENDERS.HDFC, LENDERS.ICICI, LENDERS.KOTAK, LENDERS.INDUSIND, LENDERS.AXIS_BANK, LENDERS.AXIS_FIN].forEach(l => lenders.delete(l));
             }
 
-            return [...new Set(eligibleLenders)];
+            return [...lenders];
         }
 
+        /* ──── 2. SALARIED – OD LIMIT ──────────────────────────────────────── */
         function getODLimitEligibilitySalaried(data) {
-            const { salary, companyCategory, addrProof, hasAddressDoc } = data;
-            const isStrongProof = ['Aadhaar Card', 'Passport', 'Driving License', 'Voter ID'].includes(addrProof);
+            const { salary, pfDeducted, tdsDeducted, companyCategory, addrProof, hasAddressDoc } = data;
+            const lenders = new Set();
+            const proof = normProof(addrProof);
+            const strongProof = ['Aadhaar Card', 'Electricity Bill', 'Passport', 'Driving License', 'Voter ID', 'Rent Agreement', 'Wifi Bill'].includes(proof) && hasAddressDoc === 'yes';
 
-            // OD requires strong, available proof
-            if (!isStrongProof || hasAddressDoc === 'no') {
-                return [];
+            // (A) PF/TDS (50–90K)
+            if (salary >= 50000 && salary <= 90000 && (pfDeducted === 'yes' || tdsDeducted === 'no')) {
+                [LENDERS.BAJAJ, LENDERS.TATA, LENDERS.ABFL].forEach(lenders.add, lenders);
+            }
+            if (salary > 90000 && (pfDeducted === 'yes' || tdsDeducted === 'yes/no')) {
+                [LENDERS.BAJAJ, LENDERS.TATA, LENDERS.KOTAK, LENDERS.ABFL].forEach(lenders.add, lenders);
+            }
+            if (salary > 50000 && (pfDeducted === 'no' || tdsDeducted === 'no')) {
+                [LENDERS.ABFL].forEach(lenders.add, lenders);
+            }
+            // (B) Company + salary
+            if (strongProof) {
+                const highCats = ['Super Cat A', 'Cat A', 'Cat B'];
+                if (highCats.includes(companyCategory) && salary < 45000) {
+                    [LENDERS.BAJAJ, LENDERS.TATA, LENDERS.ABFL].forEach(lenders.add, lenders);
+                }
+                if (['Super Cat A', 'Cat A', 'Cat B', 'Cat C', 'Cat D'].includes(companyCategory) && salary < 85000) {
+                    [LENDERS.BAJAJ, LENDERS.TATA, LENDERS.ABFL].forEach(lenders.add, lenders);
+                }
+                if (highCats.concat('Cat C').includes(companyCategory) && salary > 85000) {
+                    [LENDERS.BAJAJ, LENDERS.TATA, LENDERS.KOTAK, LENDERS.ABFL].forEach(lenders.add, lenders);
+                }
             }
 
-            const highTierCompany = ['Government', 'Super Cat A', 'Cat A', 'Cat B'].includes(companyCategory);
-            if (highTierCompany && salary >= 50000) {
-                return ['Bajaj Finance', 'Tata Capital', 'ABFL', 'Kotak Bank'];
-            }
-            if (salary >= 100000) {
-                return ['Bajaj Finance', 'Tata Capital', 'ABFL'];
-            }
-            return [];
+            return strongProof ? [...lenders] : [];
         }
 
+        /* ──── 3. BUSINESS – TERM LOAN ────────────────────────────────────── */
         function getBusinessLoanEligibility(data) {
-            const { turnover, gst, itr, license, addrProof, hasAddressDoc, age } = data;
-            if (age < 23) return [];
+            const { turnover, gst, itr, license, addrProof, hasAddressDoc } = data;
+            const lenders = new Set();
+            const turnover50L = turnover >= 5e6 && turnover < 1e7;
+            const turnover1Cr = turnover >= 1e7;
+            const hasLicence = license && license !== 'N/A';
 
-            let lenders = [];
-            if (turnover >= 5000000) {
-                if (itr === 'yes' && license !== 'N/A') {
-                    lenders.push('InCred', 'Paycence', 'ABFL', 'Shriram Finance', 'Lending Kart', 'Indifie');
-                }
-                if (gst === 'yes' && itr === 'yes') {
-                    lenders.push('Bajaj', 'Tata', 'Chola', 'ABFL', 'L&T', 'Piramal', 'Godrej');
-                }
+            if (turnover50L && gst === 'yes' && itr === 'yes') {
+                [LENDERS.BAJAJ, LENDERS.TATA, LENDERS.CHOLA, LENDERS.INDIFIE].forEach(lenders.add, lenders);
+            }
+            if (turnover1Cr && gst === 'yes' && itr === 'yes') {
+                [LENDERS.BAJAJ, LENDERS.TATA, LENDERS.CHOLA, LENDERS.INDIFIE, LENDERS.ABFL, LENDERS.LNT, LENDERS.PIRAMAL, LENDERS.GODREJ, LENDERS.SHRIRAM, LENDERS.LENDING_KART].forEach(lenders.add, lenders);
+            }
+            if (turnover50L && gst === 'no' && itr === 'yes' && hasLicence) {
+                [LENDERS.BAJAJ, LENDERS.TATA, LENDERS.CHOLA, LENDERS.INCRED, LENDERS.PAYCENCE, LENDERS.INDIFIE].forEach(lenders.add, lenders);
+            }
+            if (turnover1Cr && gst === 'no' && itr === 'yes' && hasLicence) {
+                [LENDERS.BAJAJ, LENDERS.TATA, LENDERS.CHOLA, LENDERS.INCRED, LENDERS.PAYCENCE, LENDERS.ABFL, LENDERS.LNT, LENDERS.GODREJ, LENDERS.SHRIRAM, LENDERS.LENDING_KART, LENDERS.INDIFIE].forEach(lenders.add, lenders);
             }
 
-            // Filter out lenders if proof is weak or unavailable
-            const isWeakProof = ['Electricity Bill', 'Rent Agreement'].includes(addrProof);
-            if (isWeakProof || hasAddressDoc === 'no') {
-                const strictLenders = ['L&T', 'Godrej', 'Piramal'];
-                lenders = lenders.filter(l => !strictLenders.includes(l));
+            // weak-proof filter
+            const proof = normProof(addrProof);
+            const weakProof = ['Rent Agreement'].includes(proof) || hasAddressDoc !== 'yes';
+            if (weakProof) {
+                [LENDERS.LNT, LENDERS.GODREJ, LENDERS.PIRAMAL].forEach(l => lenders.delete(l));
             }
 
-            return [...new Set(lenders)];
+            return [...lenders];
         }
 
+        /* ──── 4. BUSINESS – OD LIMIT ─────────────────────────────────────── */
         function getBusinessODEligibility(data) {
-            const { turnover, itr, addrProof, hasAddressDoc, age } = data;
+            const { turnover, gst, itr, license, addrProof, hasAddressDoc, age } = data;
             if (age < 25) return [];
+            const lenders = new Set();
+            const proof = normProof(addrProof);
+            const strongProof = ['Aadhaar Card', 'Electricity Bill', 'Passport', 'Driving License', 'Voter ID'].includes(proof) && hasAddressDoc === 'yes';
+            const turnover50L = turnover >= 5e6 && turnover < 1e7;
+            const turnover1Cr = turnover >= 1e7;
+            const hasLicence = license && license !== 'N/A';
 
-            const isStrongProof = ['Aadhaar Card', 'Passport', 'Driving License', 'Voter ID'].includes(addrProof);
-            if (!isStrongProof || hasAddressDoc === 'no') {
-                return [];
+            if (turnover50L && gst === 'yes' && itr === 'yes') {
+                [LENDERS.BAJAJ, LENDERS.TATA].forEach(lenders.add, lenders);
+            }
+            if (turnover50L && gst === 'no' && itr === 'yes' && hasLicence) {
+                [LENDERS.BAJAJ, LENDERS.TATA].forEach(lenders.add, lenders);
+            }
+            if (turnover1Cr && gst === 'yes' && itr === 'yes') {
+                [LENDERS.BAJAJ, LENDERS.TATA, LENDERS.ABFL, LENDERS.LNT, LENDERS.GODREJ].forEach(lenders.add, lenders);
+            }
+            if (turnover1Cr && gst === 'no' && itr === 'yes' && hasLicence) {
+                [LENDERS.BAJAJ, LENDERS.TATA, LENDERS.ABFL, LENDERS.LNT].forEach(lenders.add, lenders);
             }
 
-            if (turnover >= 10000000 && itr === 'yes') {
-                return ['Bajaj', 'Tata', 'ABFL', 'L&T', 'Godrej'];
-            }
-            return [];
+            return strongProof ? [...lenders] : [];
         }
-
 
         function showError(messages) {
-            const errorList = byId('errorList');
-            errorList.innerHTML = messages.map(m => `<li class="error-item"><i class="fas fa-exclamation-circle"></i> ${m}</li>`).join('');
-            const errorContainer = byId('errorContainer');
-            errorContainer.style.display = 'block';
-            errorContainer.scrollIntoView({ behavior: 'smooth' });
+            const list = byId('errorList');
+            list.innerHTML = messages.map(m => `<li class="error-item"><i class="fas fa-exclamation-circle"></i> ${m}</li>`).join('');
+            const c = byId('errorContainer'); c.style.display = 'block'; c.scrollIntoView({ behavior: 'smooth' });
         }
+        function clearErrors() { byId('errorContainer').style.display = 'none'; byId('errorList').innerHTML = ''; }
 
-        function clearErrors() {
-            byId('errorContainer').style.display = 'none';
-            byId('errorList').innerHTML = '';
-        }
-
-        // Main Calculation Function
+        // Main Calculation
         function calculateEligibility() {
             try {
-                clearErrors();
-                showLoading();
-
+                clearErrors(); showLoading();
                 const errors = validateForm();
-                if (errors.length > 0) {
-                    hideLoading();
-                    showError(errors);
-                    return;
-                }
+                if (errors.length > 0) { hideLoading(); showError(errors); return; }
 
                 calculationCompleted = true;
 
@@ -1767,47 +1597,39 @@
                     maxFOIRAmount = Math.round((profit / 12) * 0.5); // 50% of monthly profit
                     Object.assign(customerData, {
                         turnover: toNum(byId('turnover').value),
-                        profit,
-                        gst: byId('gst').value,
-                        itr: byId('itr').value,
-                        license: byId('license').value,
-                        age: toNum(byId('calculatedAgeBusiness').value),
-                        dob: byId('dobBusiness').value
+                        profit, gst: byId('gst').value, itr: byId('itr').value, license: byId('license').value,
+                        age: toNum(byId('calculatedAgeBusiness').value), dob: byId('dobBusiness').value
                     });
                     eligibilityResults.businessLoan = getBusinessLoanEligibility(customerData);
                     eligibilityResults.odLimit = getBusinessODEligibility(customerData);
                 }
 
-                const loanRows = document.querySelectorAll('#loanTable tbody tr');
-                let totalObligatedEMI = 0;
-                let hasBTEligibleLoan = false;
+                // Existing loans
+                const rows = document.querySelectorAll('#loanTable tbody tr');
+                let totalObligatedEMI = 0, totalPOS = 0, hasBTEligibleLoan = false;
                 customerData.existingLoans = [];
-
-                loanRows.forEach(row => {
+                rows.forEach(row => {
                     const loanType = row.querySelector('.loan-type').value;
                     const emi = toNum(row.querySelector('.loan-emi').value);
+                    const pos = toNum(row.querySelector('.loan-pos').value);
                     const obligationPercent = toNum(row.querySelector('.loan-obligation').value);
-                    const btOption = row.querySelector('.loan-bt').value;
+                    const bt = row.querySelector('.loan-bt').value;
 
-                    if (emi > 0) {
-                        const netEMI = getNetEMI(emi, obligationPercent, btOption);
-
+                    if (emi > 0 || pos > 0) {
+                        const netEMI = getNetEMI(emi, obligationPercent, bt);
                         customerData.existingLoans.push({
                             type: loanType,
                             party: row.querySelector('.loan-party').value,
                             obligationPercent,
                             sanction: toNum(row.querySelector('.loan-sanction').value),
-                            emi,
-                            netEMI, // Store for PDF
+                            pos, emi, netEMI,
                             tenure: toNum(row.querySelector('.loan-tenure').value),
                             rate: toNum(row.querySelector('.loan-rate').value),
-                            bt: btOption
+                            bt
                         });
-
                         totalObligatedEMI += netEMI;
-                        if (loanType !== 'Home Loan' && btOption === 'Yes') {
-                            hasBTEligibleLoan = true;
-                        }
+                        if (bt === 'No') totalPOS += pos;
+                        if (loanType !== 'Home Loan' && bt === 'Yes') hasBTEligibleLoan = true;
                     }
                 });
 
@@ -1820,20 +1642,30 @@
                     suggestBT = true;
                 }
 
+                // OD minimum threshold rule
                 if (maxEligibleLoanAmount < 500000) {
                     eligibilityResults.odLimit = [];
                 }
 
                 const result = {
-                    status: determineStatus(eligibilityResults, maxEligibleLoanAmount, customerData.recentFunding),
-                    suggestedLenders: [...new Set([...eligibilityResults.personalLoan, ...eligibilityResults.businessLoan, ...eligibilityResults.odLimit])],
+                    status: determineStatus(eligibilityResults, maxEligibleLoanAmount, customerData.recentFunding, totalPOS),
+                    suggestedLenders: [],
                     eligibilityResults,
                     maxFOIRAmount,
                     totalExistingEMI: Math.round(totalObligatedEMI),
+                    totalPOS: Math.round(totalPOS),
                     availableEMI: Math.round(availableEMI),
                     maxEligibleLoanAmount,
                     suggestBT
                 };
+
+                // If Highly Over-leveraged → wipe lenders
+                if (result.status.includes('Highly Over-leveraged')) {
+                    eligibilityResults.personalLoan = [];
+                    eligibilityResults.businessLoan = [];
+                    eligibilityResults.odLimit = [];
+                }
+                result.suggestedLenders = [...new Set([...(eligibilityResults.personalLoan || []), ...(eligibilityResults.businessLoan || []), ...(eligibilityResults.odLimit || [])])];
 
                 window.currentInputData = customerData;
                 window.currentEligibilityResult = result;
@@ -1841,92 +1673,59 @@
                 displayResults(customerData, result);
                 hideLoading();
 
-            } catch (error) {
+            } catch (err) {
                 hideLoading();
-                console.error('Calculation error:', error);
+                console.error('Calculation error:', err);
                 showError(['An error occurred during calculation. Please check your inputs.']);
             }
         }
 
-        function determineStatus(eligibility, maxLoan, recentFunding) {
+        function determineStatus(eligibility, maxLoan, recentFunding, totalPOS) {
+            if (totalPOS > maxLoan) return 'Highly Over-leveraged';
             const hasAnyLoan = (eligibility.personalLoan && eligibility.personalLoan.length > 0) || (eligibility.businessLoan && eligibility.businessLoan.length > 0);
             const hasOD = eligibility.odLimit && eligibility.odLimit.length > 0;
 
             if (maxLoan <= 0) return 'Ineligible - High Obligations';
-            if (hasAnyLoan || hasOD) {
-                if (recentFunding === 'yes') return 'Review Required - Recent Funding';
-                if (hasAnyLoan && hasOD) return 'Eligible - Loan + OD';
-                if (hasAnyLoan) return 'Eligible - Loan Only';
-                if (hasOD) return 'Eligible - OD Only';
-            }
+            if (recentFunding === 'yes') return 'Review Required - Recent Funding';
+            if (hasAnyLoan && hasOD) return 'Eligible - Loan + OD';
+            if (hasAnyLoan) return 'Eligible - Loan Only';
+            if (hasOD) return 'Eligible - OD Only';
             return 'Ineligible - Criteria Not Met';
         }
 
         function displayResults(data, result) {
             const statusClass = result.status.includes('Eligible') ? 'status-eligible' : result.status.includes('Review') ? 'status-review' : 'status-ineligible';
-
-            let btMessageHTML = '';
-            if (result.suggestBT) {
-                btMessageHTML = `
-                    <div class="bt-suggestion">
-                        <i class="fas fa-lightbulb"></i>
-                        <div>
-                            <strong>Balance Transfer Recommended:</strong> 💡 You’re paying high EMIs compared to your income. A Balance Transfer (BT) is recommended to reduce your current EMI burden.
-                        </div>
-                    </div>`;
-            }
+            let btHTML = result.suggestBT ? `
+                <div class="bt-suggestion"><i class="fas fa-lightbulb"></i>
+                    <div><strong>Balance Transfer Recommended:</strong> You’re paying high EMIs compared to your income. A Balance Transfer (BT) may reduce your EMI burden.</div>
+                </div>` : '';
 
             let modalHTML = `
                 <div class="result-card">
                     <h3>Assessment Summary</h3>
-                    <center>
-                        <div class="${statusClass} status-indicator" style="margin-top:1rem;">
-                            <i class="fas fa-check-circle"></i>
-                            ${result.status}
-                        </div>
-                    </center>
-                    ${btMessageHTML}
+                    <center><div class="${statusClass} status-indicator" style="margin-top:1rem;"><i class="fas fa-check-circle"></i> ${result.status}</div></center>
+                    ${btHTML}
                 </div>
-
                 <div class="result-card">
                     <h3>Financial Metrics</h3>
                     <div class="metrics-grid">
-                        <div class="metric-card">
-                            <div class="metric-label">Max FOIR Amount</div>
-                            <div class="metric-value">${formatCurrency(result.maxFOIRAmount)}</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-label">Total Obligated EMI</div>
-                            <div class="metric-value">${formatCurrency(result.totalExistingEMI)}</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-label">Available EMI for New Loan</div>
-                            <div class="metric-value">${formatCurrency(result.availableEMI)}</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-label">Max Eligible Loan Amount</div>
-                            <div class="metric-value">${formatCurrency(result.maxEligibleLoanAmount)}</div>
-                        </div>
+                        <div class="metric-card"><div class="metric-label">Max FOIR Amount</div><div class="metric-value">${formatCurrency(result.maxFOIRAmount)}</div></div>
+                        <div class="metric-card"><div class="metric-label">Total Obligated EMI</div><div class="metric-value">${formatCurrency(result.totalExistingEMI)}</div></div>
+                        <div class="metric-card"><div class="metric-label">Total Outstanding (Non-BT)</div><div class="metric-value">${formatCurrency(result.totalPOS)}</div></div>
+                        <div class="metric-card"><div class="metric-label">Available EMI for New Loan</div><div class="metric-value">${formatCurrency(result.availableEMI)}</div></div>
+                        <div class="metric-card"><div class="metric-label">Max Eligible Loan Amount</div><div class="metric-value">${formatCurrency(result.maxEligibleLoanAmount)}</div></div>
                     </div>
                 </div>
             `;
 
-            if (result.suggestedLenders.length > 0) {
+            const anyLenders = (result.eligibilityResults.odLimit || []).length + (result.eligibilityResults.personalLoan || []).length + (result.eligibilityResults.businessLoan || []).length;
+            if (anyLenders > 0) {
                 modalHTML += `
                     <div class="result-card">
                         <h3>Eligible Products & Lenders</h3>
-                        ${result.eligibilityResults.odLimit.length > 0 ? `
-                            <h4>OD Limit</h4>
-                            <div class="lender-container">${result.eligibilityResults.odLimit.map(l => `<div class="lender-pill">${l}</div>`).join('')}</div>
-                        ` : ''}
-                        ${data.customerType === 'salaried' && result.eligibilityResults.personalLoan.length > 0 ? `
-                            <h4 style="margin-top:1rem;">Personal Loan</h4>
-                            <div class="lender-container">${result.eligibilityResults.personalLoan.map(l => `<div class="lender-pill">${l}</div>`).join('')}</div>
-                        ` : ''}
-                        ${data.customerType === 'business' && result.eligibilityResults.businessLoan.length > 0 ? `
-                            <h4 style="margin-top:1rem;">Business Loan</h4>
-                            <div class="lender-container">${result.eligibilityResults.businessLoan.map(l => `<div class="lender-pill">${l}</div>`).join('')}</div>
-                        ` : ''}
+                        ${result.eligibilityResults.odLimit?.length ? `<h4>OD Limit</h4><div class="lender-container">${result.eligibilityResults.odLimit.map(l => `<div class="lender-pill">${l}</div>`).join('')}</div>` : ''}
+                        ${data.customerType === 'salaried' && result.eligibilityResults.personalLoan?.length ? `<h4 style="margin-top:1rem;">Personal Loan</h4><div class="lender-container">${result.eligibilityResults.personalLoan.map(l => `<div class="lender-pill">${l}</div>`).join('')}</div>` : ''}
+                        ${data.customerType === 'business' && result.eligibilityResults.businessLoan?.length ? `<h4 style="margin-top:1rem;">Business Loan</h4><div class="lender-container">${result.eligibilityResults.businessLoan.map(l => `<div class="lender-pill">${l}</div>`).join('')}</div>` : ''}
                     </div>
                 `;
             }
@@ -1935,274 +1734,173 @@
             openModal();
         }
 
-        // Modal Control Functions
-        function openModal() {
-            document.body.style.overflow = 'hidden';
-            byId('resultsModal').classList.add('active');
-            byId('resultsModal').setAttribute('aria-hidden', 'false');
-        }
+        function openModal() { document.body.style.overflow = 'hidden'; byId('resultsModal').classList.add('active'); byId('resultsModal').setAttribute('aria-hidden', 'false'); }
+        function closeModal() { document.body.style.overflow = ''; byId('resultsModal').classList.remove('active'); byId('resultsModal').setAttribute('aria-hidden', 'true'); }
 
-        function closeModal() {
-            document.body.style.overflow = '';
-            byId('resultsModal').classList.remove('active');
-            byId('resultsModal').setAttribute('aria-hidden', 'true');
-        }
-
-        // PDF Generation
         function generateReportContent(inputData, result) {
-            if (!inputData || !result) {
-                return '<div style="padding:16px">No report data available</div>';
-            }
-
-            const reportDate = new Date().toLocaleDateString('en-IN', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-            });
-
+            if (!inputData || !result) return '<div style="padding:16px">No report data available</div>';
+            const reportDate = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
             const eligibleProducts = [];
             if (result.eligibilityResults) {
-                if (result.eligibilityResults.odLimit.length > 0) {
-                    eligibleProducts.push({ type: 'OD Limit', lenders: result.eligibilityResults.odLimit });
-                }
-                if (result.eligibilityResults.personalLoan.length > 0) {
-                    eligibleProducts.push({ type: 'Personal Loan', lenders: result.eligibilityResults.personalLoan });
-                }
-                if (result.eligibilityResults.businessLoan.length > 0) {
-                    eligibleProducts.push({ type: 'Business Loan', lenders: result.eligibilityResults.businessLoan });
-                }
+                if (result.eligibilityResults.odLimit?.length) eligibleProducts.push({ type: 'OD Limit', lenders: result.eligibilityResults.odLimit });
+                if (result.eligibilityResults.personalLoan?.length) eligibleProducts.push({ type: 'Personal Loan', lenders: result.eligibilityResults.personalLoan });
+                if (result.eligibilityResults.businessLoan?.length) eligibleProducts.push({ type: 'Business Loan', lenders: result.eligibilityResults.businessLoan });
             }
-
             let profileHTML = '';
             if (inputData.customerType === 'salaried') {
                 profileHTML = `
-                    <tr><td style="padding: 8px; width: 40%;"><strong>Customer Type:</strong></td><td style="padding: 8px;">Salaried Professional</td></tr>
-                    <tr><td style="padding: 8px;"><strong>Date of Birth:</strong></td><td style="padding: 8px;">${inputData.dob ? new Date(inputData.dob).toLocaleDateString('en-IN') : 'N/A'}</td></tr>
-                    <tr><td style="padding: 8px;"><strong>Age:</strong></td><td style="padding: 8px;">${inputData.age} years</td></tr>
-                    <tr><td style="padding: 8px;"><strong>Monthly Salary:</strong></td><td style="padding: 8px;">${formatCurrency(inputData.salary)}</td></tr>
-                    <tr><td style="padding: 8px;"><strong>Company Category:</strong></td><td style="padding: 8px;">${inputData.companyCategory}</td></tr>
-                    <tr><td style="padding: 8px;"><strong>FOIR Allowed:</strong></td><td style="padding: 8px;">${inputData.foirAllowed}%</td></tr>
-                    <tr><td style="padding: 8px;"><strong>PF/TDS Deduction:</strong></td><td style="padding: 8px;">${(inputData.pfDeducted === 'yes' || inputData.tdsDeducted === 'yes') ? 'Yes' : 'No'}</td></tr>
+                    <tr><td style="padding:8px;width:40%;"><strong>Customer Type:</strong></td><td style="padding:8px;">Salaried Professional</td></tr>
+                    <tr><td style="padding:8px;"><strong>Date of Birth:</strong></td><td style="padding:8px;">${inputData.dob ? new Date(inputData.dob).toLocaleDateString('en-IN') : 'N/A'}</td></tr>
+                    <tr><td style="padding:8px;"><strong>Age:</strong></td><td style="padding:8px;">${inputData.age} years</td></tr>
+                    <tr><td style="padding:8px;"><strong>Monthly Salary:</strong></td><td style="padding:8px;">${formatCurrency(inputData.salary)}</td></tr>
+                    <tr><td style="padding:8px;"><strong>Company Category:</strong></td><td style="padding:8px;">${inputData.companyCategory}</td></tr>
+                    <tr><td style="padding:8px;"><strong>FOIR Allowed:</strong></td><td style="padding:8px;">${inputData.foirAllowed}%</td></tr>
+                    <tr><td style="padding:8px;"><strong>PF/TDS Deduction:</strong></td><td style="padding:8px;">${(inputData.pfDeducted === 'yes' || inputData.tdsDeducted === 'yes') ? 'Yes' : 'No'}</td></tr>
                 `;
             } else {
                 profileHTML = `
-                    <tr><td style="padding: 8px; width: 40%;"><strong>Customer Type:</strong></td><td style="padding: 8px;">Business Owner</td></tr>
-                    <tr><td style="padding: 8px;"><strong>Date of Birth:</strong></td><td style="padding: 8px;">${inputData.dob ? new Date(inputData.dob).toLocaleDateString('en-IN') : 'N/A'}</td></tr>
-                    <tr><td style="padding: 8px;"><strong>Age:</strong></td><td style="padding: 8px;">${inputData.age} years</td></tr>
-                    <tr><td style="padding: 8px;"><strong>Annual Turnover:</strong></td><td style="padding: 8px;">${formatCurrency(inputData.turnover)}</td></tr>
-                    <tr><td style="padding: 8px;"><strong>Annual Profit:</strong></td><td style="padding: 8px;">${formatCurrency(inputData.profit)}</td></tr>
-                    <tr><td style="padding: 8px;"><strong>GST Registered:</strong></td><td style="padding: 8px;">${inputData.gst === 'yes' ? 'Yes' : 'No'}</td></tr>
-                    <tr><td style="padding: 8px;"><strong>ITR Filed:</strong></td><td style="padding: 8px;">${inputData.itr === 'yes' ? 'Yes' : 'No'}</td></tr>
+                    <tr><td style="padding:8px;width:40%;"><strong>Customer Type:</strong></td><td style="padding:8px;">Business Owner</td></tr>
+                    <tr><td style="padding:8px;"><strong>Date of Birth:</strong></td><td style="padding:8px;">${inputData.dob ? new Date(inputData.dob).toLocaleDateString('en-IN') : 'N/A'}</td></tr>
+                    <tr><td style="padding:8px;"><strong>Age:</strong></td><td style="padding:8px;">${inputData.age} years</td></tr>
+                    <tr><td style="padding:8px;"><strong>Annual Turnover:</strong></td><td style="padding:8px;">${formatCurrency(inputData.turnover)}</td></tr>
+                    <tr><td style="padding:8px;"><strong>Annual Profit:</strong></td><td style="padding:8px;">${formatCurrency(inputData.profit)}</td></tr>
+                    <tr><td style="padding:8px;"><strong>GST Registered:</strong></td><td style="padding:8px;">${inputData.gst === 'yes' ? 'Yes' : 'No'}</td></tr>
+                    <tr><td style="padding:8px;"><strong>ITR Filed:</strong></td><td style="padding:8px;">${inputData.itr === 'yes' ? 'Yes' : 'No'}</td></tr>
+                    <tr><td style="padding:8px;"><strong>Business License:</strong></td><td style="padding:8px;">${inputData.license}</td></tr>
                 `;
             }
 
             const statusColor = result.status.includes('Eligible') ? '#10b981' : result.status.includes('Review') ? '#f59e0b' : '#ef4444';
-
-            let btMessagePDF = '';
-            if (result.suggestBT) {
-                btMessagePDF = `<div style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; border-radius: 8px; margin-bottom: 25px; color: #b45309; font-size: 14px;"><strong>Balance Transfer Recommended:</strong> High EMI utilization detected. A BT on eligible loans could lower your monthly payments and improve overall eligibility.</div>`;
-            }
+            const btMsg = result.suggestBT ? `<div style="background:#fef3c7;border-left:4px solid #f59e0b;padding:15px;border-radius:8px;margin-bottom:25px;color:#b45309;font-size:14px;"><strong>Balance Transfer Recommended:</strong> High EMI utilization detected. A BT on eligible loans could lower your monthly payments and improve overall eligibility.</div>` : '';
 
             return `
-                <div id="resultsContent" style="font-family: 'Inter', 'Space Grotesk', Arial, sans-serif; padding: 20px; background: white;">
-                    <div style="text-align: center; margin-bottom: 30px; border-bottom: 3px solid #667eea; padding-bottom: 20px;">
-                        <img src="https://zzorba.com/wp-content/uploads/2021/02/logo2.jpg" alt="ZZORBA" style="height: 50px; margin-bottom: 10px;">
-                        <h1 style="color: #0f172a; margin: 10px 0; font-size: 24px;">Eligibility Assessment Report</h1>
-                        <p style="color: #64748b; margin: 5px 0;">Generated on: ${reportDate}</p>
+                <div id="resultsContent" style="font-family:'Inter','Space Grotesk',Arial,sans-serif;padding:20px;background:white;">
+                    <div style="text-align:center;margin-bottom:30px;border-bottom:3px solid #667eea;padding-bottom:20px;">
+                        <img src="https://zzorba.com/wp-content/uploads/2021/02/logo2.jpg" alt="ZZORBA" style="height:50px;margin-bottom:10px;">
+                        <h1 style="color:#0f172a;margin:10px 0;font-size:24px;">Eligibility Assessment Report</h1>
+                        <p style="color:#64748b;margin:5px 0;">Generated on: ${reportDate}</p>
                     </div>
-
-                    <div style="background: linear-gradient(135deg, ${statusColor}22, ${statusColor}11); border-left: 4px solid ${statusColor}; padding: 15px; border-radius: 8px; margin-bottom: 25px;">
-                        <h2 style="color: ${statusColor}; margin: 0; font-size: 20px;">
-                            <strong>Status:</strong> ${result.status}
-                        </h2>
+                    <div style="background:linear-gradient(135deg,${statusColor}22,${statusColor}11);border-left:4px solid ${statusColor};padding:15px;border-radius:8px;margin-bottom:25px;">
+                        <h2 style="color:${statusColor};margin:0;font-size:20px;"><strong>Status:</strong> ${result.status}</h2>
                     </div>
-
-                    ${btMessagePDF}
-
-                    <div style="margin-bottom: 25px;">
-                        <h3 style="color: #334155; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 15px;">Customer Information</h3>
-                        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
-                            <tr><td style="padding: 8px; width: 40%;"><strong>Name:</strong></td><td style="padding: 8px;">${inputData.custName}</td></tr>
-                            <tr><td style="padding: 8px;"><strong>Mobile:</strong></td><td style="padding: 8px;">${inputData.custMobile}</td></tr>
-                            <tr><td style="padding: 8px;"><strong>Email:</strong></td><td style="padding: 8px;">${inputData.custEmail}</td></tr>
-                            <tr><td style="padding: 8px;"><strong>Location:</strong></td><td style="padding: 8px;">${inputData.location}</td></tr>
-                            <tr><td style="padding: 8px;"><strong>Address Proof:</strong></td><td style="padding: 8px;">${inputData.addrProof} (${inputData.hasAddressDoc === 'yes' ? 'Available' : 'Not Available'})</td></tr>
+                    ${btMsg}
+                    <div style="margin-bottom:25px;">
+                        <h3 style="color:#334155;border-bottom:2px solid #e2e8f0;padding-bottom:10px;margin-bottom:15px;">Customer Information</h3>
+                        <table style="width:100%;border-collapse:collapse;font-size:14px;">
+                            <tr><td style="padding:8px;width:40%;"><strong>Name:</strong></td><td style="padding:8px;">${inputData.custName}</td></tr>
+                            <tr><td style="padding:8px;"><strong>Mobile:</strong></td><td style="padding:8px;">${inputData.custMobile}</td></tr>
+                            <tr><td style="padding:8px;"><strong>Email:</strong></td><td style="padding:8px;">${inputData.custEmail}</td></tr>
+                            <tr><td style="padding:8px;"><strong>Location:</strong></td><td style="padding:8px;">${inputData.location}</td></tr>
+                            <tr><td style="padding:8px;"><strong>Address Proof:</strong></td><td style="padding:8px;">${inputData.addrProof} (${inputData.hasAddressDoc === 'yes' ? 'Available' : 'Not Available'})</td></tr>
                         </table>
                     </div>
-
-                    <div style="margin-bottom: 25px;">
-                        <h3 style="color: #334155; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 15px;">Financial Profile</h3>
-                        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
-                            ${profileHTML}
-                        </table>
+                    <div style="margin-bottom:25px;">
+                        <h3 style="color:#334155;border-bottom:2px solid #e2e8f0;padding-bottom:10px;margin-bottom:15px;">Financial Profile</h3>
+                        <table style="width:100%;border-collapse:collapse;font-size:14px;">${profileHTML}</table>
                     </div>
-
-                    <div style="margin-bottom: 25px;">
-                        <h3 style="color: #334155; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 15px;">Eligibility Calculation</h3>
-                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
-                            <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border-left: 3px solid #667eea;">
-                                <div style="color: #64748b; font-size: 14px;">Max FOIR Amount</div>
-                                <div style="color: #0f172a; font-size: 20px; font-weight: bold; margin-top: 5px;">${formatCurrency(result.maxFOIRAmount)}</div>
-                            </div>
-                            <div style="background: #fef3c7; padding: 15px; border-radius: 8px; border-left: 3px solid #f59e0b;">
-                                <div style="color: #64748b; font-size: 14px;">Total Obligated EMI</div>
-                                <div style="color: #0f172a; font-size: 20px; font-weight: bold; margin-top: 5px;">${formatCurrency(result.totalExistingEMI)}</div>
-                            </div>
-                            <div style="background: #d1fae5; padding: 15px; border-radius: 8px; border-left: 3px solid #10b981;">
-                                <div style="color: #64748b; font-size: 14px;">Available EMI</div>
-                                <div style="color: #0f172a; font-size: 20px; font-weight: bold; margin-top: 5px;">${formatCurrency(result.availableEMI)}</div>
-                            </div>
-                            <div style="background: #e0e7ff; padding: 15px; border-radius: 8px; border-left: 3px solid #6366f1;">
-                                <div style="color: #64748b; font-size: 14px;">Max Eligible Loan</div>
-                                <div style="color: #0f172a; font-size: 20px; font-weight: bold; margin-top: 5px;">${formatCurrency(result.maxEligibleLoanAmount)}</div>
-                            </div>
+                    <div style="margin-bottom:25px;">
+                        <h3 style="color:#334155;border-bottom:2px solid #e2e8f0;padding-bottom:10px;margin-bottom:15px;">Eligibility Calculation</h3>
+                        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:15px;">
+                            <div style="background:#f8fafc;padding:15px;border-radius:8px;border-left:3px solid #667eea;"><div style="color:#64748b;font-size:14px;">Max FOIR Amount</div><div style="color:#0f172a;font-size:20px;font-weight:bold;margin-top:5px;">${formatCurrency(result.maxFOIRAmount)}</div></div>
+                            <div style="background:#fef3c7;padding:15px;border-radius:8px;border-left:3px solid #f59e0b;"><div style="color:#64748b;font-size:14px;">Total Obligated EMI</div><div style="color:#0f172a;font-size:20px;font-weight:bold;margin-top:5px;">${formatCurrency(result.totalExistingEMI)}</div></div>
+                            <div style="background:#fef3c7;padding:15px;border-radius:8px;border-left:3px solid #f59e0b;"><div style="color:#64748b;font-size:14px;">Total Outstanding (Non-BT)</div><div style="color:#0f172a;font-size:20px;font-weight:bold;margin-top:5px;">${formatCurrency(result.totalPOS)}</div></div>
+                            <div style="background:#d1fae5;padding:15px;border-radius:8px;border-left:3px solid #10b981;"><div style="color:#64748b;font-size:14px;">Available EMI</div><div style="color:#0f172a;font-size:20px;font-weight:bold;margin-top:5px;">${formatCurrency(result.availableEMI)}</div></div>
+                            <div style="background:#e0e7ff;padding:15px;border-radius:8px;border-left:3px solid #6366f1;"><div style="color:#64748b;font-size:14px;">Max Eligible Loan</div><div style="color:#0f172a;font-size:20px;font-weight:bold;margin-top:5px;">${formatCurrency(result.maxEligibleLoanAmount)}</div></div>
                         </div>
                     </div>
-
                     ${eligibleProducts.length > 0 ? `
-                    <div style="margin-bottom: 25px;">
-                        <h3 style="color: #334155; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 15px;">Eligible Products & Lenders</h3>
-                        ${eligibleProducts.map(product => `
-                            <div style="margin-bottom: 20px;">
-                                <h4 style="color: #667eea; margin-bottom: 10px;">${product.type}</h4>
-                                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                    ${product.lenders.map(l =>
-                `<span style="background: #667eea; color: white; padding: 8px 16px; border-radius: 20px; font-weight: 500; font-size: 14px;">${l}</span>`
-            ).join('')}
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                    ` : '<p style="color: #94a3b8; text-align: center;">No eligible products found based on the provided criteria.</p>'}
-
+                        <div style="margin-bottom:25px;">
+                            <h3 style="color:#334155;border-bottom:2px solid #e2e8f0;padding-bottom:10px;margin-bottom:15px;">Eligible Products & Lenders</h3>
+                            ${eligibleProducts.map(p => `
+                                <div style="margin-bottom:20px;">
+                                    <h4 style="color:#667eea;margin-bottom:10px;">${p.type}</h4>
+                                    <div style="display:flex;flex-wrap:wrap;gap:10px;">
+                                        ${p.lenders.map(l => `<span style="background:#667eea;color:white;padding:8px 16px;border-radius:20px;font-weight:500;font-size:14px;">${l}</span>`).join('')}
+                                    </div>
+                                </div>`).join('')}
+                        </div>
+                    ` : '<p style="color:#94a3b8;text-align:center;">No eligible products found based on the provided criteria.</p>'}
                     ${inputData.existingLoans && inputData.existingLoans.length > 0 ? `
-                        <div style="margin-bottom: 25px; page-break-inside: avoid;">
-                            <h3 style="color: #334155; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 15px;">Existing Loan Details</h3>
-                            <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+                        <div style="margin-bottom:25px;page-break-inside:avoid;">
+                            <h3 style="color:#334155;border-bottom:2px solid #e2e8f0;padding-bottom:10px;margin-bottom:15px;">Existing Loan Details</h3>
+                            <table style="width:100%;border-collapse:collapse;font-size:12px;">
                                 <thead>
-                                    <tr style="background: #f1f5f9;">
-                                        <th style="padding: 10px; text-align: left; border: 1px solid #e2e8f0;">Loan Type</th>
-                                        <th style="padding: 10px; text-align: right; border: 1px solid #e2e8f0;">Outstanding</th>
-                                        <th style="padding: 10px; text-align: right; border: 1px solid #e2e8f0;">EMI</th>
-                                        <th style="padding: 10px; text-align: center; border: 1px solid #e2e8f0;">Obligation</th>
-                                        <th style="padding: 10px; text-align: right; border: 1px solid #e2e8f0;">Net EMI</th>
-                                        <th style="padding: 10px; text-align: center; border: 1px solid #e2e8f0;">BT Option</th>
+                                    <tr style="background:#f1f5f9;">
+                                        <th style="padding:10px;text-align:left;border:1px solid #e2e8f0;">Loan Type</th>
+                                        <th style="padding:10px;text-align:right;border:1px solid #e2e8f0;">Sanction</th>
+                                        <th style="padding:10px;text-align:right;border:1px solid #e2e8f0;">POS</th>
+                                        <th style="padding:10px;text-align:right;border:1px solid #e2e8f0;">EMI</th>
+                                        <th style="padding:10px;text-align:center;border:1px solid #e2e8f0;">Obligation</th>
+                                        <th style="padding:10px;text-align:right;border:1px solid #e2e8f0;">Net EMI</th>
+                                        <th style="padding:10px;text-align:center;border:1px solid #e2e8f0;">BT Option</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     ${inputData.existingLoans.map(loan => {
-                const emiDisplay = loan.bt === 'Yes'
-                    ? `<s style="color: #9ca3af;">${formatCurrency(loan.emi)}</s>`
-                    : formatCurrency(loan.emi);
+                const emiDisp = loan.bt === 'Yes' ? `<s style="color:#9ca3af;">${formatCurrency(loan.emi)}</s>` : formatCurrency(loan.emi);
                 return `
                                             <tr>
-                                                <td style="padding: 10px; border: 1px solid #e2e8f0;">${loan.type}</td>
-                                                <td style="padding: 10px; text-align: right; border: 1px solid #e2e8f0;">${formatCurrency(loan.sanction)}</td>
-                                                <td style="padding: 10px; text-align: right; border: 1px solid #e2e8f0;">${emiDisplay}</td>
-                                                <td style="padding: 10px; text-align: center; border: 1px solid #e2e8f0;">${loan.obligationPercent}%</td>
-                                                <td style="padding: 10px; text-align: right; border: 1px solid #e2e8f0; font-weight: bold; ${loan.bt === 'Yes' ? 'color: #10b981;' : ''}">${formatCurrency(loan.netEMI)}</td>
-                                                <td style="padding: 10px; text-align: center; border: 1px solid #e2e8f0; ${loan.bt === 'Yes' ? 'color: #10b981; font-weight: bold;' : ''}">${loan.bt}</td>
-                                            </tr>
-                                        `;
+                                                <td style="padding:10px;border:1px solid #e2e8f0;">${loan.type}</td>
+                                                <td style="padding:10px;text-align:right;border:1px solid #e2e8f0;">${formatCurrency(loan.sanction)}</td>
+                                                <td style="padding:10px;text-align:right;border:1px solid #e2e8f0;">${formatCurrency(loan.pos)}</td>
+                                                <td style="padding:10px;text-align:right;border:1px solid #e2e8f0;">${emiDisp}</td>
+                                                <td style="padding:10px;text-align:center;border:1px solid #e2e8f0;">${loan.obligationPercent}%</td>
+                                                <td style="padding:10px;text-align:right;border:1px solid #e2e8f0; font-weight:bold; ${loan.bt === 'Yes' ? 'color:#10b981;' : ''}">${formatCurrency(loan.netEMI)}</td>
+                                                <td style="padding:10px;text-align:center;border:1px solid #e2e8f0; ${loan.bt === 'Yes' ? 'color:#10b981;font-weight:bold;' : ''}">${loan.bt}</td>
+                                            </tr>`;
             }).join('')}
                                 </tbody>
                             </table>
                         </div>
                     ` : ''}
-
-                    <div style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #e2e8f0; text-align: center; color: #64748b; font-size: 12px;">
+                    <div style="margin-top:40px;padding-top:20px;border-top:2px solid #e2e8f0;text-align:center;color:#64748b;font-size:12px;">
                         <p>This report is generated by Zzorba Financial Consultant Services</p>
-                        <p>Visit us at: <a href="https://zzorba.com" style="color: #667eea;">zzorba.com</a></p>
+                        <p>Visit us at: <a href="https://zzorba.com" style="color:#667eea;">zzorba.com</a></p>
                     </div>
                 </div>
             `;
         }
 
         function generateAndDisplayReport() {
-            if (!window.currentInputData || !window.currentEligibilityResult) {
-                alert('Please calculate eligibility first.');
-                return;
-            }
-
-            const reportHTML = generateReportContent(
-                window.currentInputData,
-                window.currentEligibilityResult
-            );
-
-            // Replace the modal's content with the detailed report view
+            if (!window.currentInputData || !window.currentEligibilityResult) { alert('Please calculate eligibility first.'); return; }
+            const reportHTML = generateReportContent(window.currentInputData, window.currentEligibilityResult);
             byId('modalContent').innerHTML = reportHTML;
         }
 
         function downloadPDF() {
             const element = byId('resultsContent');
-            if (!element) {
-                alert('Please generate the PDF report first by clicking "Generate PDF Report".');
-                return;
-            }
-
+            if (!element) { alert('Please generate the PDF report first by clicking "Generate PDF Report".'); return; }
             showLoading();
-
-            const customerName = window.currentInputData?.custName
-                ? window.currentInputData.custName.replace(/\s+/g, '_')
-                : 'Customer';
+            const customerName = window.currentInputData?.custName ? window.currentInputData.custName.replace(/\s+/g, '_') : 'Customer';
             const filename = `Zzorba_Eligibility_Report_${customerName}_${new Date().getTime()}.pdf`;
 
-            html2canvas(element, {
-                scale: 2,
-                useCORS: true,
-                allowTaint: true,
-                logging: false,
-                windowWidth: element.scrollWidth,
-                windowHeight: element.scrollHeight
-            }).then(canvas => {
-                if (window.jsPDF) {
-                    const pdf = new window.jsPDF('p', 'mm', 'a4');
-                    const imgData = canvas.toDataURL('image/jpeg', 1.0);
-
-                    const pageWidth = pdf.internal.pageSize.getWidth();
-                    const pageHeight = pdf.internal.pageSize.getHeight();
-                    const imgWidth = pageWidth - 20; // Margin
-                    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-                    let heightLeft = imgHeight;
-                    let position = 10; // Top margin
-
-                    pdf.addImage(imgData, 'JPEG', 10, position, imgWidth, imgHeight);
-                    heightLeft -= (pageHeight - 20);
-
-                    while (heightLeft > 0) {
-                        position = heightLeft - imgHeight;
-                        pdf.addPage();
+            html2canvas(element, { scale: 2, useCORS: true, allowTaint: true, logging: false, windowWidth: element.scrollWidth, windowHeight: element.scrollHeight })
+                .then(canvas => {
+                    if (window.jsPDF) {
+                        const pdf = new window.jsPDF('p', 'mm', 'a4');
+                        const imgData = canvas.toDataURL('image/jpeg', 1.0);
+                        const pageWidth = pdf.internal.pageSize.getWidth(), pageHeight = pdf.internal.pageSize.getHeight();
+                        const imgWidth = pageWidth - 20, imgHeight = (canvas.height * imgWidth) / canvas.width;
+                        let heightLeft = imgHeight, position = 10;
                         pdf.addImage(imgData, 'JPEG', 10, position, imgWidth, imgHeight);
-                        heightLeft -= pageHeight;
-                    }
-
-                    pdf.save(filename);
-                } else {
-                    alert('PDF library not loaded. Please refresh and try again.');
-                }
-                hideLoading();
-            }).catch(error => {
-                console.error('PDF generation error:', error);
-                alert('Failed to generate PDF. Please try again.');
-                hideLoading();
-            });
+                        heightLeft -= (pageHeight - 20);
+                        while (heightLeft > 0) {
+                            position = heightLeft - imgHeight + 10;
+                            pdf.addPage();
+                            pdf.addImage(imgData, 'JPEG', 10, position, imgWidth, imgHeight);
+                            heightLeft -= pageHeight;
+                        }
+                        pdf.save(filename);
+                    } else { alert('PDF library not loaded. Please refresh and try again.'); }
+                    hideLoading();
+                }).catch(err => { console.error('PDF generation error:', err); alert('Failed to generate PDF. Please try again.'); hideLoading(); });
         }
 
-        // Reset Form Function
-        function resetForm() {
-            if (confirm('Are you sure you want to reset all data?')) {
-                calculationCompleted = false;
-                location.reload();
-            }
-        }
+        function generateAndDisplayReport() { if (!window.currentInputData || !window.currentEligibilityResult) { alert('Please calculate eligibility first.'); return; } const html = generateReportContent(window.currentInputData, window.currentEligibilityResult); byId('modalContent').innerHTML = html; }
 
-        // Initialize everything when page loads
-        window.addEventListener('load', () => {
-            if (!window.jsPDF && window.jspdf && window.jspdf.jsPDF) {
-                window.jsPDF = window.jspdf.jsPDF;
-            }
-        });
+        function resetForm() { if (confirm('Are you sure you want to reset all data?')) { calculationCompleted = false; location.reload(); } }
+
+        window.addEventListener('load', () => { if (!window.jsPDF && window.jspdf && window.jspdf.jsPDF) { window.jsPDF = window.jspdf.jsPDF; } });
     </script>
 </body>
 

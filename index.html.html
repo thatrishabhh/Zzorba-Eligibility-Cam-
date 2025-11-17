@@ -1217,9 +1217,8 @@
                             <th>Party</th>
                             <th>Obligation %</th>
                             <th>Sanction</th>
-                            <th>Outstanding</th>
                             <th>EMI</th>
-                            <th>Rem. Tenure (m)</th>
+                            <th>Tenure (m)</th>
                             <th>Rate (%)</th>
                             <th>BT Option</th>
                             <th>Action</th>
@@ -1467,7 +1466,7 @@
             byId('foirAllowed').value = finalFOIR;
         }
 
-        // --- [FIXED] Loan Table Management ---
+        // Loan Table Management
         const LOAN_TYPES = [
             'Personal Loan',
             'Home Loan',
@@ -1483,7 +1482,6 @@
             const tbody = document.querySelector('#loanTable tbody');
             const tr = document.createElement('tr');
             tr.style.animation = 'fadeIn 0.5s ease';
-            // [FIX] Added the 'loan-outstanding' input field which was missing and corrected the order.
             tr.innerHTML = `
                 <td>
                     <select class="loan-type">
@@ -1505,7 +1503,6 @@
                     </select>
                 </td>
                 <td><input type="number" class="loan-sanction" placeholder="Amount"></td>
-                <td><input type="number" class="loan-outstanding" placeholder="Amount"></td>
                 <td><input type="number" class="loan-emi" placeholder="EMI"></td>
                 <td><input type="number" class="loan-tenure" placeholder="Months"></td>
                 <td><input type="number" class="loan-rate" placeholder="%" step="0.1"></td>
@@ -1523,7 +1520,7 @@
             `;
 
             tbody.appendChild(tr);
-            // [FIX] Removed the call to the faulty setupEMICalculation function.
+            setupEMICalculation(tr);
             setupLoanTypeListener(tr);
         }
 
@@ -1540,8 +1537,36 @@
             });
         }
 
-        // [FIX] Deleted the entire 'setupEMICalculation' function.
-        // It was the primary source of the bug, as the EMI for existing loans should be entered manually.
+        function setupEMICalculation(row) {
+            const sanction = row.querySelector('.loan-sanction');
+            const tenure = row.querySelector('.loan-tenure');
+            const rate = row.querySelector('.loan-rate');
+            const emi = row.querySelector('.loan-emi');
+            const loanType = row.querySelector('.loan-type');
+
+            const calculateEMI = () => {
+                if (calculationCompleted) return;
+
+                const p = toNum(sanction.value);
+                const t = parseInt(tenure.value, 10) || 0;
+                const r = toNum(rate.value);
+                const type = loanType.value;
+
+                if (type === 'Credit Card') {
+                    if (p > 0) emi.value = Math.round(p * 0.05);
+                } else if (p > 0 && t > 0 && r > 0) {
+                    const monthlyRate = (r / 100) / 12;
+                    const pow = Math.pow(1 + monthlyRate, t);
+                    const calculatedEMI = (p * monthlyRate * pow) / (pow - 1);
+                    emi.value = Math.round(calculatedEMI);
+                }
+            };
+
+            [sanction, tenure, rate, loanType].forEach(el => {
+                el.addEventListener('input', calculateEMI);
+                el.addEventListener('change', calculateEMI);
+            });
+        }
 
         function removeLoanRow(btn) {
             const tbody = document.querySelector('#loanTable tbody');
@@ -1573,7 +1598,7 @@
             return errors;
         }
 
-        // --- [FIXED] Eligibility Logic ---
+        // --- MERGED Eligibility Logic ---
 
         const LENDER_POOLS = {
             premium: ['HDFC Bank', 'ICICI Bank', 'Axis Bank', 'Kotak Bank', 'IndusInd Bank'],
@@ -1590,10 +1615,12 @@
         function getPersonalLoanEligibilitySalaried(data) {
             const { salary, pfDeducted, tdsDeducted, addrProof, hasAddressDoc, companyCategory, age } = data;
 
+            // Age-based special case (from old logic)
             if (age >= 21 && age < 23) {
                 return ['Bajaj'];
             }
 
+            // Special Case: No Address Proof (from new logic)
             if (hasAddressDoc === 'no') {
                 const highTierCompany = ['Government', 'Super Cat A', 'Cat A', 'Cat B', 'Cat C'].includes(companyCategory);
                 if (highTierCompany) {
@@ -1605,14 +1632,16 @@
             let eligibleLenders = [];
             const hasPfOrTds = pfDeducted === 'yes' || tdsDeducted === 'yes';
 
+            // PF/TDS based eligibility (from new logic)
             if (salary >= 35000) {
                 if (hasPfOrTds) {
                     eligibleLenders = [...LENDER_POOLS.standard, ...LENDER_POOLS.conservative];
                 } else {
-                    eligibleLenders = ['InCred', 'Shriram Finance', 'Fullerton India', 'ABFL'];
+                    eligibleLenders = ['InCred', 'Shriram Finance', 'Fullerton India', 'ABFL']; // More restrictive list from old logic
                 }
             }
 
+            // Address Proof based filtering (from new logic)
             const isWeakProof = ['Electricity Bill', 'Rent Agreement'].includes(addrProof);
             if (isWeakProof) {
                 eligibleLenders = eligibleLenders.filter(lender => !LENDER_POOLS.premium.includes(lender));
@@ -1625,26 +1654,47 @@
             const { salary, companyCategory, addrProof, hasAddressDoc, pfDeducted, tdsDeducted } = data;
             const isStrongProof = ['Aadhaar Card', 'Passport', 'Driving License', 'Voter ID'].includes(addrProof);
 
-            if (!isStrongProof || hasAddressDoc === 'no' || salary < 50000) {
+            // Stricter rules: OD requires strong proof and availability
+            if (!isStrongProof || hasAddressDoc === 'no') {
                 return [];
             }
 
-            const noDeductions = (pfDeducted === 'no' || pfDeducted === 'N/A') && (tdsDeducted === 'no' || tdsDeducted === 'N/A');
+            // New rule: Minimum salary of 50000 for OD eligibility
+            if (salary < 50000) {
+                return [];
+            }
+
+            // Check if there are no deductions (PF or TDS)
+            const noDeductions = (pfDeducted === 'no' || pfDeducted === 'N/A') &&
+                (tdsDeducted === 'no' || tdsDeducted === 'N/A');
+
+            // If no deductions, only ABFL provides OD
             if (noDeductions) {
                 return ['ABFL'];
             }
 
+            // If deductions are present (PF or TDS), proceed with tier-based logic
             const hasDeductions = pfDeducted === 'yes' || tdsDeducted === 'yes';
+
             if (hasDeductions) {
-                const highTierCompany = ['Government', 'Super Cat A', 'Cat A', 'Cat B'].includes(companyCategory);
                 const Alltiercompany = ['Government', 'Super Cat A', 'Cat A', 'Cat B', 'Cat C', 'Cat D', 'Nonlisted'].includes(companyCategory);
 
+                // For salary >= 1 lakh with deductions
                 if (salary >= 100000) {
-                    if (highTierCompany) return ['Kotak bank', 'Bajaj Finance', 'Tata Capital', 'ABFL'];
                     return ['Bajaj Finance', 'Tata Capital', 'ABFL'];
                 }
+                if (salary >= 100000 && highTierCompany) {
+                    return ['Kotak bank'];
+                }
+
+                // For salary >= 50 k with deductions and good company category
+                if (salary >= 50000 && Alltiercompany) {
+                    return ['Bajaj Finance', 'Tata Capital', 'ABFL'];
+                }
+
+                // For salary >= 50 K with deductions (default)
                 if (salary >= 50000) {
-                    if (Alltiercompany) return ['Bajaj Finance', 'Tata Capital', 'ABFL'];
+                    return ['Bajaj Finance', 'Tata Capital', 'ABFL'];
                 }
             }
 
@@ -1654,6 +1704,7 @@
         function getBusinessLoanEligibility(data) {
             const { turnover, gst, itr, license, addrProof, hasAddressDoc, age } = data;
 
+            // Age-based special case (from old logic)
             if (age >= 23 && age < 25) {
                 if (turnover >= 5000000 && gst === 'yes' && itr === 'yes') return ['Bajaj', 'Chola'];
                 return [];
@@ -1661,26 +1712,28 @@
 
             let lenders = [];
             if (turnover >= 5000000) {
+                // Combined lender list from both logic sets
                 if (gst === 'yes' && license !== 'N/A') {
                     lenders.push(...['Bajaj', 'Tata', 'Chola', 'InCred', 'Paycence', 'Shriram Finance', 'Lending Kart', 'Indifie']);
                 }
                 if (gst === 'yes' && itr === 'yes') {
                     lenders.push(...['Bajaj', 'Tata', 'Chola', 'Indifie', 'Piramal', 'Shriram Finance', 'InCred', 'Paycence']);
                 }
-                if (gst === 'no' && itr === 'yes' && license !== 'N/A') {
+                if (gst === 'N/A' && itr === 'yes' && license !== 'yes') {
                     lenders.push(...['Bajaj', 'Tata', 'Chola', 'InCred', 'Paycence', 'Shriram Finance', 'Lending Kart', 'Indifie']);
                 }
             }
 
             if (turnover >= 10000000) {
+                // Combined lender list from both logic sets
                 if (gst === 'yes' && itr === 'yes' && license !== 'N/A') {
                     lenders.push(...['Bajaj', 'Tata', 'Chola', 'InCred', 'Paycence', 'ABFL', 'L&T', 'Godrej', 'Shriram Finance', 'Lending Kart', 'Indifie']);
                 }
-                if (gst === 'no' && itr === 'yes' && license !== 'N/A') {
+                if (gst === 'N/A' && itr === 'yes' && license !== 'yes') {
                     lenders.push(...['Bajaj', 'Tata', 'Chola', 'InCred', 'Paycence', 'ABFL', 'L&T', 'Godrej', 'Shriram Finance', 'Lending Kart', 'Indifie']);
                 }
             }
-
+            // Filter out lenders if proof is weak or unavailable (from new logic)
             const isWeakProof = ['Rent Agreement'].includes(addrProof);
             if (isWeakProof || hasAddressDoc === 'no') {
                 const strictLenders = ['L&T', 'Godrej', 'Piramal'];
@@ -1691,8 +1744,9 @@
         }
 
         function getBusinessODEligibility(data) {
-            const { turnover, gst, itr, license, addrProof, hasAddressDoc, age } = data;
+            const { turnover, itr, addrProof, hasAddressDoc, age } = data;
 
+            // Stricter age from new logic
             if (age < 25) return [];
 
             const isStrongProof = ['Aadhaar Card', 'Electricity Bill', 'Passport', 'Driving License', 'Voter ID'].includes(addrProof);
@@ -1703,10 +1757,10 @@
             if (turnover >= 10000000 && gst === 'yes' && itr === 'yes') {
                 return ['Bajaj', 'Tata', 'ABFL', 'L&T', 'Godrej'];
             }
-            if (turnover >= 5000000 && gst === 'no' && itr === 'yes' && license !== 'N/A') {
+            return [];
+            if (turnover >= 5000000 && gst === 'N/A' && itr === 'yes' && license !== 'yes') {
                 return ['Bajaj', 'Tata'];
             }
-            return [];
         }
 
 
@@ -1723,7 +1777,7 @@
             byId('errorList').innerHTML = '';
         }
 
-        // --- [FIXED] Main Calculation Function ---
+        // Main Calculation Function
         function calculateEligibility() {
             try {
                 clearErrors();
@@ -1792,7 +1846,6 @@
                 let hasBTEligibleLoan = false;
                 customerData.existingLoans = [];
 
-                // [FIX] This loop now correctly processes ALL rows.
                 loanRows.forEach(row => {
                     const loanType = row.querySelector('.loan-type').value;
                     const emi = toNum(row.querySelector('.loan-emi').value);
@@ -1802,15 +1855,13 @@
                     if (emi > 0) {
                         const netEMI = getNetEMI(emi, obligationPercent, btOption);
 
-                        // [FIX] Correctly reading all fields, including the 'loan-outstanding' one.
                         customerData.existingLoans.push({
                             type: loanType,
                             party: row.querySelector('.loan-party').value,
                             obligationPercent,
                             sanction: toNum(row.querySelector('.loan-sanction').value),
-                            outstanding: toNum(row.querySelector('.loan-outstanding').value),
                             emi,
-                            netEMI,
+                            netEMI, // Store for PDF
                             tenure: toNum(row.querySelector('.loan-tenure').value),
                             rate: toNum(row.querySelector('.loan-rate').value),
                             bt: btOption
@@ -1856,7 +1907,7 @@
             } catch (error) {
                 hideLoading();
                 console.error('Calculation error:', error);
-                showError(['An error occurred during calculation. Please check your inputs and the console for details.']);
+                showError(['An error occurred during calculation. Please check your inputs.']);
             }
         }
 
@@ -1960,7 +2011,7 @@
             byId('resultsModal').setAttribute('aria-hidden', 'true');
         }
 
-        // --- [FIXED] PDF Generation ---
+        // PDF Generation
         function generateReportContent(inputData, result) {
             if (!inputData || !result) {
                 return '<div style="padding:16px">No report data available</div>';
@@ -2094,10 +2145,9 @@
                                 <thead>
                                     <tr style="background: #f1f5f9;">
                                         <th style="padding: 10px; text-align: left; border: 1px solid #e2e8f0;">Loan Type</th>
-                                        <th style="padding: 10px; text-align: right; border: 1px solid #e2e8f0;">Sanction</th>
                                         <th style="padding: 10px; text-align: right; border: 1px solid #e2e8f0;">Outstanding</th>
                                         <th style="padding: 10px; text-align: right; border: 1px solid #e2e8f0;">EMI</th>
-                                        <th style="padding: 10px; text-align: center; border: 1px solid #e2e8f0;">Obligation %</th>
+                                        <th style="padding: 10px; text-align: center; border: 1px solid #e2e8f0;">Obligation</th>
                                         <th style="padding: 10px; text-align: right; border: 1px solid #e2e8f0;">Net EMI</th>
                                         <th style="padding: 10px; text-align: center; border: 1px solid #e2e8f0;">BT Option</th>
                                     </tr>
@@ -2111,7 +2161,6 @@
                                             <tr>
                                                 <td style="padding: 10px; border: 1px solid #e2e8f0;">${loan.type}</td>
                                                 <td style="padding: 10px; text-align: right; border: 1px solid #e2e8f0;">${formatCurrency(loan.sanction)}</td>
-                                                <td style="padding: 10px; text-align: right; border: 1px solid #e2e8f0;">${formatCurrency(loan.outstanding)}</td>
                                                 <td style="padding: 10px; text-align: right; border: 1px solid #e2e8f0;">${emiDisplay}</td>
                                                 <td style="padding: 10px; text-align: center; border: 1px solid #e2e8f0;">${loan.obligationPercent}%</td>
                                                 <td style="padding: 10px; text-align: right; border: 1px solid #e2e8f0; font-weight: bold; ${loan.bt === 'Yes' ? 'color: #10b981;' : ''}">${formatCurrency(loan.netEMI)}</td>
@@ -2213,7 +2262,7 @@
                 location.reload();
             }
         }
-        z
+
         // Initialize everything when page loads
         window.addEventListener('load', () => {
             if (!window.jsPDF && window.jspdf && window.jspdf.jsPDF) {

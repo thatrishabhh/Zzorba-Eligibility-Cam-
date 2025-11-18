@@ -159,7 +159,6 @@
         .logo-container img {
             height: 100px;
             display: block;
-            /* Corrected from 'Circle' */
             border: 2px solid;
             border-radius: 5px;
             border-image: linear-gradient(to right, #FFD700 0%, #B8860B 50%, #FFD700 100%) 1;
@@ -439,13 +438,11 @@
             letter-spacing: 1px;
         }
 
-        /* Highlight EMI column header */
         .premium-table th:nth-child(6) {
             background: linear-gradient(135deg, #5b21b6, #6d28d9);
             position: relative;
         }
 
-        /* Highlight Rate column header */
         .premium-table th:nth-child(8) {
             background: linear-gradient(135deg, #b45309, #d97706);
             position: relative;
@@ -457,7 +454,6 @@
             color: var(--dark);
         }
 
-        /* Style EMI column cells */
         .premium-table td:nth-child(6) {
             background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
             font-weight: 600;
@@ -465,7 +461,6 @@
             min-width: 120px;
         }
 
-        /* Style Rate column cells */
         .premium-table td:nth-child(8) {
             background: linear-gradient(135deg, #fffbeb, #fef3c7);
             font-weight: 600;
@@ -473,7 +468,6 @@
             min-width: 100px;
         }
 
-        /* Style EMI input field */
         .premium-table td:nth-child(6) input {
             background: white;
             border: 2px solid var(--primary);
@@ -489,7 +483,6 @@
             outline: none;
         }
 
-        /* Style Rate input field */
         .premium-table td:nth-child(8) input {
             background: white;
             border: 2px solid var(--warning);
@@ -520,19 +513,16 @@
             color: #9ca3af;
         }
 
-        /* Add visual indicator for calculated EMI values */
         .premium-table td:nth-child(6) input[readonly] {
             background: linear-gradient(135deg, #dcfce7, #bbf7d0);
             cursor: not-allowed;
         }
 
-        /* Add visual indicator for calculated Rate values */
         .premium-table td:nth-child(8) input[readonly] {
             background: linear-gradient(135deg, #fef3c7, #fde68a);
             cursor: not-allowed;
         }
 
-        /* Responsive adjustment for smaller screens */
         @media (max-width: 1024px) {
             .premium-table {
                 min-width: 1300px;
@@ -708,7 +698,6 @@
             background: linear-gradient(135deg, #f8fafc, #f1f5f9);
         }
 
-        /* Result Cards */
         .result-card {
             background: white;
             border-radius: 20px;
@@ -1007,7 +996,6 @@
             <div class="header-content">
                 <div class="logo-container">
                     <a href="https://zzorba.com" target="_blank" rel="noopener">
-                        <!-- Corrected logo source to a reliable, CORS-friendly URL -->
                         <img src="https://zzorba.com/wp-content/uploads/2021/02/logo2.jpg" alt="Zzorba Logo">
                     </a>
                 </div>
@@ -1099,7 +1087,6 @@
             </div>
 
             <div class="form-grid">
-                <!-- DOB for Salaried -->
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-birthday-cake"></i> Date of Birth</label>
                     <input type="date" id="dob" class="input-field" max="">
@@ -1185,7 +1172,6 @@
             </div>
 
             <div class="form-grid">
-                <!-- DOB for Business -->
                 <div class="input-group">
                     <label class="input-label"><i class="fas fa-birthday-cake"></i> Date of Birth</label>
                     <input type="date" id="dobBusiness" class="input-field" max="">
@@ -1371,7 +1357,7 @@
         // Ensure jsPDF available
         window.jsPDF = window.jspdf && window.jspdf.jsPDF ? window.jspdf.jsPDF : null;
 
-        // Global state to prevent auto-calculation interference
+        // Global state
         let calculationCompleted = false;
 
         // Helper functions
@@ -1407,7 +1393,7 @@
             toggleCustomerFields();
         });
 
-        // Reusable DOB listener setup function
+        // DOB listener setup
         function setupDOBListener(dobId, ageId, noteId) {
             const dobInput = document.getElementById(dobId);
             const ageOutput = document.getElementById(ageId);
@@ -1415,8 +1401,7 @@
 
             if (!dobInput || !ageOutput || !ageNote) return;
 
-            // Set today's date as maximum selectable DOB
-            const todayISO = new Date().toISOString().split('T')[0];
+            const todayISO = new Date().toISOString().split('T');
             dobInput.setAttribute('max', todayISO);
 
             dobInput.addEventListener('change', () => {
@@ -1443,7 +1428,6 @@
                 if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
                 ageOutput.value = age;
 
-                // MERGED Age Logic: Use min age of 21 but provide warnings for 21-23
                 if (age >= 21 && age < 23) {
                     ageNote.style.display = 'block';
                     ageNote.style.color = 'var(--warning)';
@@ -1463,15 +1447,13 @@
         }
 
         function setupEventListeners() {
-            // Customer type toggle
             document.querySelectorAll('input[name="customerType"]').forEach(r =>
                 r.addEventListener('change', () => {
                     toggleCustomerFields();
-                    calculationCompleted = false; // Reset on type change
+                    calculationCompleted = false;
                 })
             );
 
-            // FOIR calculation triggers
             ['salary', 'companyCat', 'pfDed', 'tdsDed', 'hasOfficialEmail'].forEach(id => {
                 const el = byId(id);
                 if (el) {
@@ -1480,15 +1462,11 @@
                 }
             });
 
-            // Mobile number validation
             byId('custMobile').addEventListener('input', e => {
                 e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
             });
 
-            // DOB and Age calculation for SALARIED
             setupDOBListener('dob', 'calculatedAge', 'ageNote');
-
-            // DOB and Age calculation for BUSINESS
             setupDOBListener('dobBusiness', 'calculatedAgeBusiness', 'ageNoteBusiness');
         }
 
@@ -1521,7 +1499,7 @@
                 else if (salary >= 70000 && salary <= 89999) foirPercentage = 70;
                 else if (salary >= 90000 && salary <= 149999) foirPercentage = 75;
                 else if (salary >= 150000) foirPercentage = 75;
-                else foirPercentage = 50; // default
+                else foirPercentage = 50;
             } else if (lowerTierCategories.includes(companyCategory)) {
                 if (salary < 45000) foirPercentage = 40;
                 else if (salary >= 45000 && salary <= 54999) foirPercentage = 45;
@@ -1529,14 +1507,13 @@
                 else if (salary >= 60000 && salary <= 89999) foirPercentage = 55;
                 else if (salary >= 90000 && salary <= 149999) foirPercentage = 60;
                 else if (salary >= 150000) foirPercentage = 65;
-                else foirPercentage = 40; // default
+                else foirPercentage = 40;
             } else {
-                foirPercentage = 45; // conservative default
+                foirPercentage = 45;
             }
 
-            // Add bonuses
-            if (pfDed === 'yes' || tdsDed === 'yes') foirPercentage += 5; // deductions present
-            if (hasEmail === 'yes') foirPercentage += 5; // official email bonus
+            if (pfDed === 'yes' || tdsDed === 'yes') foirPercentage += 5;
+            if (hasEmail === 'yes') foirPercentage += 5;
 
             const finalFOIR = Math.min(75, Math.max(35, Math.round(foirPercentage)));
             byId('foirAllowed').value = finalFOIR;
@@ -1605,7 +1582,7 @@
             const loanTypeSelect = row.querySelector('.loan-type');
             const btSelect = row.querySelector('.loan-bt');
             loanTypeSelect.addEventListener('change', () => {
-                if (loanTypeSelect.value === 'Home Loan' || loanTypeSelect.value === "Gold Loan" || loanTypeSelect.value === "Vehicle Loan" || loanTypeSelect.value === "Business Loan") {
+                if (['Home Loan', 'Gold Loan', 'Vehicle Loan', 'Business Loan'].includes(loanTypeSelect.value)) {
                     btSelect.value = 'No';
                     btSelect.disabled = true;
                 } else {
@@ -1677,25 +1654,61 @@
             return errors;
         }
 
-        /**
-         * NEW: Validates that the total outstanding amount of loans not marked for BT
-         * does not exceed the customer's maximum eligibility.
-         */
-        function validateOutstandingVsEligibility(existingLoans, maxEligibleLoanAmount) {
-            const totalOutstandingForNewLoan = existingLoans
-                .filter(loan => loan.bt !== 'Yes')
-                .reduce((sum, loan) => sum + toNum(loan.outstanding), 0);
-
-            if (totalOutstandingForNewLoan >= maxEligibleLoanAmount) {
-                showError([`The total outstanding amount of your existing loans (${formatCurrency(totalOutstandingForNewLoan)}) already meets or exceeds your maximum eligibility (${formatCurrency(maxEligibleLoanAmount)}). To proceed, you must select the Balance Transfer (BT) option for some existing loans.`]);
-                return false;
-            }
-            return true;
+        // NEW: Helper function to calculate EMI for validation
+        function calculateEMIForAmount(principal, tenureMonths, annualRate) {
+            if (principal <= 0 || tenureMonths <= 0 || annualRate <= 0) return 0;
+            const monthlyRate = (annualRate / 100) / 12;
+            const pow = Math.pow(1 + monthlyRate, tenureMonths);
+            return Math.round((principal * monthlyRate * pow) / (pow - 1));
         }
 
+        // NEW: Outstanding validation function
+        function validateOutstandingAmounts(loans, maxEligibleLoanAmount, availableEMI) {
+            const errors = [];
+            let totalOutstanding = 0;
+            let btOutstanding = 0;
 
-        // --- MERGED Eligibility Logic ---
+            loans.forEach((loan, index) => {
+                totalOutstanding += loan.outstanding;
+                if (loan.bt === 'Yes') {
+                    btOutstanding += loan.outstanding;
+                }
+            });
 
+            // Validate total outstanding doesn't exceed reasonable limits
+            const maxAllowedOutstanding = maxEligibleLoanAmount * 0.8;
+
+            if (totalOutstanding > maxAllowedOutstanding) {
+                errors.push({
+                    type: 'OUTSTANDING_EXCEEDS_LIMIT',
+                    message: `Total outstanding ${formatCurrency(totalOutstanding)} exceeds recommended limit of ${formatCurrency(maxAllowedOutstanding)}`,
+                    severity: 'warning'
+                });
+            }
+
+            // Validate BT loans specifically
+            if (btOutstanding > 0) {
+                // Assuming typical BT tenure of 36 months and average rate of 12%
+                const estimatedBTEMI = calculateEMIForAmount(btOutstanding, 36, 12);
+
+                if (estimatedBTEMI > availableEMI * 0.9) {
+                    errors.push({
+                        type: 'BT_NOT_SERVICEABLE',
+                        message: `Balance transfer amount ${formatCurrency(btOutstanding)} may not be serviceable with available EMI ${formatCurrency(availableEMI)}`,
+                        severity: 'critical'
+                    });
+                }
+            }
+
+            return {
+                isValid: errors.filter(e => e.severity === 'critical').length === 0,
+                errors,
+                totalOutstanding,
+                btOutstanding
+            };
+        }
+
+        // Lender Pools
         const LENDER_POOLS = {
             premium: ['HDFC Bank', 'ICICI Bank', 'Axis Bank', 'Kotak Bank', 'IndusInd Bank', "IDFC First Bank"],
             standard: ['Tata Capital', 'Bajaj Finance'],
@@ -1708,138 +1721,160 @@
             return emi * (obligationPercent / 100);
         }
 
+        // UPDATED: Personal Loan Eligibility with return object
         function getPersonalLoanEligibilitySalaried(data) {
             const { salary, pfDeducted, tdsDeducted, addrProof, hasAddressDoc, companyCategory, age } = data;
 
-            // Age-based special case (from old logic)
             if (age >= 21 && age < 23) {
-                return ['Bajaj'];
+                return {
+                    lenders: ['Bajaj'],
+                    maxAmount: Infinity,
+                    notes: ['Co-applicant may be required due to age']
+                };
             }
 
-            // Special Case: No Address Proof (from new logic)
             if (hasAddressDoc === 'no') {
                 const highTierCompany = ['Government', 'Super Cat A', 'Cat A', 'Cat B', 'Cat C'].includes(companyCategory);
                 if (highTierCompany) {
-                    return ['HDFC Bank', 'ICICI Bank'];
+                    return { lenders: ['HDFC Bank', 'ICICI Bank'], maxAmount: Infinity };
                 }
-                return [];
+                return { lenders: [], maxAmount: 0 };
             }
 
             let eligibleLenders = [];
             const hasPfOrTds = pfDeducted === 'yes' || tdsDeducted === 'yes';
 
-            // PF/TDS based eligibility (from new logic)
             if (salary >= 35000) {
                 if (hasPfOrTds) {
                     eligibleLenders = [...LENDER_POOLS.standard, ...LENDER_POOLS.conservative];
                 } else {
-                    eligibleLenders = ['InCred', 'Shriram Finance', 'Fullerton India', 'ABFL']; // More restrictive list from old logic
+                    eligibleLenders = ['InCred', 'Shriram Finance', 'Fullerton India', 'ABFL'];
                 }
             }
 
-            // Address Proof based filtering (from new logic)
             const isWeakProof = ['Electricity Bill', 'Rent Agreement'].includes(addrProof);
             if (isWeakProof) {
                 eligibleLenders = eligibleLenders.filter(lender => !LENDER_POOLS.premium.includes(lender));
             }
 
-            return [...new Set(eligibleLenders)];
+            return {
+                lenders: [...new Set(eligibleLenders)],
+                maxAmount: Infinity // No cap on personal loans based on company category
+            };
         }
 
-        /**
-         * CORRECTED: OD Limit eligibility logic with proper Kotak Bank rule.
-         */
+        // UPDATED: OD Limit Eligibility with fixed Kotak Bank logic and 8 lakh cap
         function getODLimitEligibilitySalaried(data) {
             const { salary, companyCategory, addrProof, hasAddressDoc, pfDeducted, tdsDeducted } = data;
             const isStrongProof = ['Aadhaar Card', 'Passport', 'Driving License', 'Voter ID'].includes(addrProof);
 
-            if (!isStrongProof || hasAddressDoc === 'no') return [];
-            if (salary < 50000) return [];
+            if (!isStrongProof || hasAddressDoc === 'no') {
+                return { lenders: [], maxAmount: 0 };
+            }
+
+            if (salary < 50000) {
+                return { lenders: [], maxAmount: 0 };
+            }
+
+            // CRITICAL: Define company tiers
+            const highTierCompany = ['Government', 'Super Cat A', 'Cat A', 'Cat B', 'Cat C'].includes(companyCategory);
+            const lowerTierCompany = ['Cat D', 'Nonlisted'].includes(companyCategory);
+
+            // CRITICAL: Apply 8 lakh cap for Cat D and Nonlisted
+            const maxODAmount = lowerTierCompany ? 800000 : Infinity;
+
+            const noDeductions = (pfDeducted === 'no' || pfDeducted === 'N/A') &&
+                (tdsDeducted === 'no' || tdsDeducted === 'N/A');
+
+            if (noDeductions) {
+                return {
+                    lenders: ['ABFL'],
+                    maxAmount: maxODAmount
+                };
+            }
 
             const hasDeductions = pfDeducted === 'yes' || tdsDeducted === 'yes';
-            const highTierCompany = ['Government', 'Super Cat A', 'Cat A', 'Cat B', 'Cat C'].includes(companyCategory);
             let eligibleLenders = [];
 
             if (hasDeductions) {
                 if (salary >= 100000) {
-                    eligibleLenders.push('Bajaj Finance', 'Tata Capital', 'ABFL');
+                    eligibleLenders = ['Bajaj Finance', 'Tata Capital', 'ABFL'];
+
+                    // FIXED: Kotak Bank logic - only for high-tier companies
                     if (highTierCompany) {
                         eligibleLenders.push('Kotak Bank');
                     }
                 } else if (salary >= 50000) {
-                    eligibleLenders.push('Bajaj Finance', 'Tata Capital', 'ABFL');
-                }
-            } else { // No deductions
-                if (salary >= 50000) {
-                    eligibleLenders.push('ABFL');
+                    eligibleLenders = ['Bajaj Finance', 'Tata Capital', 'ABFL'];
                 }
             }
-            return [...new Set(eligibleLenders)];
-        }
 
+            return {
+                lenders: eligibleLenders,
+                maxAmount: maxODAmount
+            };
+        }
 
         function getBusinessLoanEligibility(data) {
             const { turnover, gst, itr, license, addrProof, hasAddressDoc, age } = data;
 
-            // Age-based special case (from old logic)
             if (age >= 23 && age < 25) {
-                if (turnover >= 5000000 && gst === 'yes' && itr === 'yes') return ['Bajaj', 'Cholamandalam'];
-                return [];
+                if (turnover >= 5000000 && gst === 'yes' && itr === 'yes') {
+                    return { lenders: ['Bajaj', 'Cholamandalam'], maxAmount: Infinity };
+                }
+                return { lenders: [], maxAmount: 0 };
             }
 
             let lenders = [];
             if (turnover >= 5000000) {
-                // Combined lender list from both logic sets
                 if (gst === 'yes' && license !== 'N/A') {
                     lenders.push(...['Bajaj', 'Tata', 'Cholamandalam', 'InCred', 'Paycence', 'Shriram Finance', 'Lending Kart', 'Indifie']);
                 }
                 if (gst === 'yes' && itr === 'yes') {
                     lenders.push(...['Bajaj', 'Tata', 'Cholamandalam', 'Indifie', 'Piramal', 'Shriram Finance', 'InCred', 'Paycence']);
                 }
-                if (gst === 'N/A' && itr === 'yes' && license !== 'yes') {
+                if (gst === 'N/A' && itr === 'yes' && license !== 'N/A') {
                     lenders.push(...['Bajaj', 'Tata', 'Cholamandalam', 'InCred', 'Paycence', 'Shriram Finance', 'Lending Kart', 'Indifie']);
                 }
             }
 
             if (turnover >= 10000000) {
-                // Combined lender list from both logic sets
                 if (gst === 'yes' && itr === 'yes' && license !== 'N/A') {
                     lenders.push(...['Bajaj', 'Tata', 'Cholamandalam', 'InCred', 'Paycence', 'ABFL', 'L&T', 'Godrej', 'Shriram Finance', 'Lending Kart', 'Indifie']);
                 }
-                if (gst === 'N/A' && itr === 'yes' && license !== 'yes') {
+                if (gst === 'N/A' && itr === 'yes' && license !== 'N/A') {
                     lenders.push(...['Bajaj', 'Tata', 'Cholamandalam', 'InCred', 'Paycence', 'ABFL', 'L&T', 'Godrej', 'Shriram Finance', 'Lending Kart', 'Indifie']);
                 }
             }
-            // Filter out lenders if proof is weak or unavailable (from new logic)
+
             const isWeakProof = ['Rent Agreement'].includes(addrProof);
             if (isWeakProof || hasAddressDoc === 'no') {
                 const strictLenders = ['L&T', 'Godrej', 'Piramal'];
                 lenders = lenders.filter(l => !strictLenders.includes(l));
             }
 
-            return [...new Set(lenders)];
+            return { lenders: [...new Set(lenders)], maxAmount: Infinity };
         }
 
         function getBusinessODEligibility(data) {
-            const { turnover, itr, addrProof, hasAddressDoc, age } = data;
+            const { turnover, gst, itr, license, addrProof, hasAddressDoc, age } = data;
 
-            // Stricter age from new logic
-            if (age < 25) return [];
+            if (age < 25) return { lenders: [], maxAmount: 0 };
 
             const isStrongProof = ['Aadhaar Card', 'Electricity Bill', 'Passport', 'Driving License', 'Voter ID'].includes(addrProof);
             if (!isStrongProof || hasAddressDoc === 'no') {
-                return [];
+                return { lenders: [], maxAmount: 0 };
             }
 
             if (turnover >= 10000000 && gst === 'yes' && itr === 'yes') {
-                return ['Bajaj', 'Tata', 'ABFL', 'L&T', 'Godrej'];
+                return { lenders: ['Bajaj', 'Tata', 'ABFL', 'L&T', 'Godrej'], maxAmount: Infinity };
             }
-            if (turnover >= 5000000 && gst === 'N/A' && itr === 'yes' && license !== 'yes') {
-                return ['Bajaj', 'Tata'];
+            if (turnover >= 5000000 && gst === 'N/A' && itr === 'yes' && license !== 'N/A') {
+                return { lenders: ['Bajaj', 'Tata'], maxAmount: Infinity };
             }
-            return [];
-        }
 
+            return { lenders: [], maxAmount: 0 };
+        }
 
         function showError(messages) {
             const errorList = byId('errorList');
@@ -1854,7 +1889,7 @@
             byId('errorList').innerHTML = '';
         }
 
-        // Main Calculation Function
+        // UPDATED: Main Calculation Function with all enhancements
         function calculateEligibility() {
             try {
                 clearErrors();
@@ -1884,7 +1919,8 @@
 
                 let eligibilityResults = { odLimit: [], personalLoan: [], businessLoan: [] };
                 let maxFOIRAmount = 0;
-                let cappedODAmount = null; // For OD limit capping
+                let maxODAmount = Infinity;
+                let maxPersonalLoanAmount = Infinity;
 
                 if (type === 'salaried') {
                     const salary = toNum(byId('salary').value);
@@ -1901,17 +1937,18 @@
                         jobTenure: toNum(byId('jobTenure').value),
                         totalExp: toNum(byId('totalExp').value)
                     });
-                    eligibilityResults.personalLoan = getPersonalLoanEligibilitySalaried(customerData);
-                    eligibilityResults.odLimit = getODLimitEligibilitySalaried(customerData);
 
-                    // NEW: OD Limit Capping for specific company categories
-                    if (customerData.companyCategory === 'Cat D' || customerData.companyCategory === 'Nonlisted') {
-                        cappedODAmount = 800000;
-                    }
+                    const plResult = getPersonalLoanEligibilitySalaried(customerData);
+                    const odResult = getODLimitEligibilitySalaried(customerData);
+
+                    eligibilityResults.personalLoan = plResult.lenders;
+                    eligibilityResults.odLimit = odResult.lenders;
+                    maxPersonalLoanAmount = plResult.maxAmount;
+                    maxODAmount = odResult.maxAmount;
 
                 } else {
                     const profit = toNum(byId('profit').value);
-                    maxFOIRAmount = Math.round((profit / 12) * 0.5); // 50% of monthly profit
+                    maxFOIRAmount = Math.round((profit / 12) * 0.5);
                     Object.assign(customerData, {
                         turnover: toNum(byId('turnover').value),
                         profit,
@@ -1921,8 +1958,12 @@
                         age: toNum(byId('calculatedAgeBusiness').value),
                         dob: byId('dobBusiness').value
                     });
-                    eligibilityResults.businessLoan = getBusinessLoanEligibility(customerData);
-                    eligibilityResults.odLimit = getBusinessODEligibility(customerData);
+
+                    const blResult = getBusinessLoanEligibility(customerData);
+                    const bodResult = getBusinessODEligibility(customerData);
+
+                    eligibilityResults.businessLoan = blResult.lenders;
+                    eligibilityResults.odLimit = bodResult.lenders;
                 }
 
                 const loanRows = document.querySelectorAll('#loanTable tbody tr');
@@ -1946,31 +1987,56 @@
                             sanction: toNum(row.querySelector('.loan-sanction').value),
                             outstanding: toNum(row.querySelector('.loan-outstanding').value),
                             emi,
-                            netEMI, // Store for PDF
+                            netEMI,
                             tenure: toNum(row.querySelector('.loan-tenure').value),
                             rate: toNum(row.querySelector('.loan-rate').value),
                             bt: btOption
                         });
 
                         totalObligatedEMI += netEMI;
-                        if (loanType !== 'Home Loan' && loanType !== "Gold Loan" && loanType !== "Vehicle Loan" && loanType !== "Business Loan" && btOption === 'Yes') {
+                        if (!['Home Loan', 'Gold Loan', 'Vehicle Loan', 'Business Loan'].includes(loanType) && btOption === 'Yes') {
                             hasBTEligibleLoan = true;
                         }
                     }
                 });
 
                 const availableEMI = Math.max(0, maxFOIRAmount - totalObligatedEMI);
-                const maxEligibleLoanAmount = Math.round(availableEMI * 40);
+                let maxEligibleLoanAmount = Math.round(availableEMI * 40);
 
-                // NEW: Validate outstanding amount against eligibility
-                if (!validateOutstandingVsEligibility(customerData.existingLoans, maxEligibleLoanAmount)) {
+                // CRITICAL: Validate outstanding amounts
+                const validation = validateOutstandingAmounts(
+                    customerData.existingLoans,
+                    maxEligibleLoanAmount,
+                    availableEMI
+                );
+
+                // Apply company category caps for salaried
+                if (type === 'salaried') {
+                    const companyCategory = customerData.companyCategory;
+                    const isLowerTier = companyCategory === 'Cat D' || companyCategory === 'Nonlisted';
+
+                    // Apply OD cap for lower tier companies
+                    if (isLowerTier && maxODAmount !== Infinity) {
+                        maxEligibleLoanAmount = Math.min(maxEligibleLoanAmount, maxODAmount);
+                    }
+                }
+
+                // Show validation errors
+                if (!validation.isValid) {
+                    showError(validation.errors.filter(e => e.severity === 'critical').map(e => e.message));
                     hideLoading();
-                    return; // Stop execution if validation fails
+                    return;
+                }
+
+                if (validation.errors.length > 0) {
+                    console.warn('Eligibility Warnings:', validation.errors.map(e => e.message));
                 }
 
                 const FOIR_UTILIZATION_THRESHOLD = 0.90;
                 let suggestBT = false;
-                if (totalObligatedEMI > 0 && maxFOIRAmount > 0 && (totalObligatedEMI / maxFOIRAmount) >= FOIR_UTILIZATION_THRESHOLD && hasBTEligibleLoan) {
+                if (totalObligatedEMI > 0 && maxFOIRAmount > 0 &&
+                    (totalObligatedEMI / maxFOIRAmount) >= FOIR_UTILIZATION_THRESHOLD &&
+                    hasBTEligibleLoan) {
                     suggestBT = true;
                 }
 
@@ -1986,8 +2052,12 @@
                     totalExistingEMI: Math.round(totalObligatedEMI),
                     availableEMI: Math.round(availableEMI),
                     maxEligibleLoanAmount,
-                    cappedODAmount, // Pass the capped amount
-                    suggestBT
+                    maxODAmount: type === 'salaried' ? maxODAmount : Infinity,
+                    maxPersonalLoanAmount,
+                    suggestBT,
+                    validationWarnings: validation.errors.filter(e => e.severity === 'warning'),
+                    totalOutstanding: validation.totalOutstanding,
+                    btOutstanding: validation.btOutstanding
                 };
 
                 window.currentInputData = customerData;
@@ -2004,7 +2074,8 @@
         }
 
         function determineStatus(eligibility, maxLoan, recentFunding) {
-            const hasAnyLoan = (eligibility.personalLoan && eligibility.personalLoan.length > 0) || (eligibility.businessLoan && eligibility.businessLoan.length > 0);
+            const hasAnyLoan = (eligibility.personalLoan && eligibility.personalLoan.length > 0) ||
+                (eligibility.businessLoan && eligibility.businessLoan.length > 0);
             const hasOD = eligibility.odLimit && eligibility.odLimit.length > 0;
 
             if (maxLoan <= 0) return 'Ineligible - High Obligations';
@@ -2017,63 +2088,53 @@
             return 'Ineligible - Criteria Not Met';
         }
 
-        /**
-         * UPDATED: Displays results, now handling the capped OD amount.
-         */
+        // UPDATED: Display Results with new fields
         function displayResults(data, result) {
-            const statusClass = result.status.includes('Eligible') ? 'status-eligible' : result.status.includes('Review') ? 'status-review' : 'status-ineligible';
+            const statusClass = result.status.includes('Eligible') ? 'status-eligible' :
+                result.status.includes('Review') ? 'status-review' : 'status-ineligible';
 
             let btMessageHTML = '';
             if (result.suggestBT) {
+                const foirUtilization = Math.round((result.totalExistingEMI / result.maxFOIRAmount) * 100);
                 btMessageHTML = `
                     <div class="bt-suggestion">
                         <i class="fas fa-lightbulb"></i>
                         <div>
-                            <strong>Balance Transfer Recommended:</strong> 💡 Your EMI obligations are high. A Balance Transfer (BT) on eligible loans is recommended to reduce your monthly burden and improve eligibility.
+                            <strong>Balance Transfer Recommended:</strong> Your EMI obligations are high (${foirUtilization}% FOIR utilization). 
+                            A Balance Transfer on eligible loans (total: ${formatCurrency(result.btOutstanding)}) could reduce your monthly burden and improve eligibility.
                         </div>
                     </div>`;
             }
 
-            const finalEligibleODAmount = result.cappedODAmount !== null ? Math.min(result.maxEligibleLoanAmount, result.cappedODAmount) : result.maxEligibleLoanAmount;
-            const isODCapped = result.cappedODAmount !== null && result.maxEligibleLoanAmount > result.cappedODAmount;
-
-            let metricsHTML = `
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-label">Max FOIR Amount</div>
-                        <div class="metric-value">${formatCurrency(result.maxFOIRAmount)}</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-label">Total Obligated EMI</div>
-                        <div class="metric-value">${formatCurrency(result.totalExistingEMI)}</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-label">Available EMI for New Loan</div>
-                        <div class="metric-value">${formatCurrency(result.availableEMI)}</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-label">Max Eligible Personal/Business Loan</div>
-                        <div class="metric-value">${formatCurrency(result.maxEligibleLoanAmount)}</div>
-                    </div>
-            `;
-
-            if (isODCapped) {
-                metricsHTML += `
-                    <div class="metric-card" style="background: linear-gradient(135deg, #fffbeb, #fef3c7); border-left-color: var(--warning);">
-                        <div class="metric-label" style="color: #b45309;">Max Eligible OD Limit (Capped)</div>
-                        <div class="metric-value" style="color: #b45309;">${formatCurrency(finalEligibleODAmount)}</div>
-                    </div>
-                `;
-            } else if (result.eligibilityResults.odLimit.length > 0) {
-                metricsHTML += `
-                    <div class="metric-card">
-                        <div class="metric-label">Max Eligible OD Limit</div>
-                        <div class="metric-value">${formatCurrency(finalEligibleODAmount)}</div>
-                    </div>
-                `;
+            let warningHTML = '';
+            if (result.validationWarnings && result.validationWarnings.length > 0) {
+                warningHTML = `
+                    <div class="bt-suggestion" style="background: linear-gradient(135deg, #fff7ed, #fed7aa); border-left: 5px solid #f97316;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong>Important Considerations:</strong>
+                            <ul style="margin: 0.5rem 0 0 1.5rem; padding: 0;">
+                                ${result.validationWarnings.map(w => `<li>${w.message}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>`;
             }
-            metricsHTML += `</div>`;
 
+            let capsInfoHTML = '';
+            if (data.customerType === 'salaried') {
+                const isLowerTier = data.companyCategory === 'Cat D' || data.companyCategory === 'Nonlisted';
+                if (isLowerTier && result.maxODAmount !== Infinity) {
+                    capsInfoHTML = `
+                        <div class="bt-suggestion" style="background: linear-gradient(135deg, #eff6ff, #dbeafe); border-left: 5px solid #3b82f6;">
+                            <i class="fas fa-info-circle"></i>
+                            <div>
+                                <strong>Company Category Note:</strong> For ${data.companyCategory} category, 
+                                OD Limit is capped at ${formatCurrency(result.maxODAmount)}. 
+                                Personal loan eligibility follows standard rules.
+                            </div>
+                        </div>`;
+                }
+            }
 
             let modalHTML = `
                 <div class="result-card">
@@ -2085,11 +2146,41 @@
                         </div>
                     </center>
                     ${btMessageHTML}
+                    ${warningHTML}
+                    ${capsInfoHTML}
                 </div>
 
                 <div class="result-card">
                     <h3>Financial Metrics</h3>
-                    ${metricsHTML}
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-label">Max FOIR Amount</div>
+                            <div class="metric-value">${formatCurrency(result.maxFOIRAmount)}</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Total Obligated EMI</div>
+                            <div class="metric-value">${formatCurrency(result.totalExistingEMI)}</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Available EMI for New Loan</div>
+                            <div class="metric-value">${formatCurrency(result.availableEMI)}</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Max Eligible Loan Amount</div>
+                            <div class="metric-value">${formatCurrency(result.maxEligibleLoanAmount)}</div>
+                            ${data.customerType === 'salaried' && result.maxODAmount !== Infinity ?
+                    `<div class="input-hint" style="margin-top: 0.5rem;"><i class="fas fa-info-circle"></i> OD capped at ${formatCurrency(result.maxODAmount)}</div>` : ''}
+                        </div>
+                        <div class="metric-card" style="background: linear-gradient(135deg, #fef3c7, #fde68a);">
+                            <div class="metric-label">Total Outstanding</div>
+                            <div class="metric-value">${formatCurrency(result.totalOutstanding)}</div>
+                        </div>
+                        ${result.btOutstanding > 0 ? `
+                        <div class="metric-card" style="background: linear-gradient(135deg, #d1fae5, #a7f3d0);">
+                            <div class="metric-label">BT Eligible Outstanding</div>
+                            <div class="metric-value">${formatCurrency(result.btOutstanding)}</div>
+                        </div>` : ''}
+                    </div>
                 </div>
             `;
 
@@ -2098,7 +2189,7 @@
                     <div class="result-card">
                         <h3>Eligible Products & Lenders</h3>
                         ${result.eligibilityResults.odLimit.length > 0 ? `
-                            <h4>OD Limit</h4>
+                            <h4>OD Limit ${result.maxODAmount !== Infinity ? `(Max: ${formatCurrency(result.maxODAmount)})` : ''}</h4>
                             <div class="lender-container">${result.eligibilityResults.odLimit.map(l => `<div class="lender-pill">${l}</div>`).join('')}</div>
                         ` : ''}
                         ${data.customerType === 'salaried' && result.eligibilityResults.personalLoan.length > 0 ? `
@@ -2117,7 +2208,6 @@
             openModal();
         }
 
-        // Modal Control Functions
         function openModal() {
             document.body.style.overflow = 'hidden';
             byId('resultsModal').classList.add('active');
@@ -2130,10 +2220,7 @@
             byId('resultsModal').setAttribute('aria-hidden', 'true');
         }
 
-        // PDF Generation
-        /**
-         * UPDATED: Generates PDF content, now handling the capped OD amount.
-         */
+        // UPDATED: PDF Generation with new fields
         function generateReportContent(inputData, result) {
             if (!inputData || !result) {
                 return '<div style="padding:16px">No report data available</div>';
@@ -2148,7 +2235,10 @@
             const eligibleProducts = [];
             if (result.eligibilityResults) {
                 if (result.eligibilityResults.odLimit.length > 0) {
-                    eligibleProducts.push({ type: 'OD Limit', lenders: result.eligibilityResults.odLimit });
+                    eligibleProducts.push({
+                        type: `OD Limit ${result.maxODAmount !== Infinity ? `(Max: ${formatCurrency(result.maxODAmount)})` : ''}`,
+                        lenders: result.eligibilityResults.odLimit
+                    });
                 }
                 if (result.eligibilityResults.personalLoan.length > 0) {
                     eligibleProducts.push({ type: 'Personal Loan', lenders: result.eligibilityResults.personalLoan });
@@ -2181,53 +2271,19 @@
                 `;
             }
 
-            const statusColor = result.status.includes('Eligible') ? '#10b981' : result.status.includes('Review') ? '#f59e0b' : '#ef4444';
+            const statusColor = result.status.includes('Eligible') ? '#10b981' :
+                result.status.includes('Review') ? '#f59e0b' : '#ef4444';
 
             let btMessagePDF = '';
             if (result.suggestBT) {
-                btMessagePDF = `<div style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; border-radius: 8px; margin-bottom: 25px; color: #b45309; font-size: 14px;"><strong>Balance Transfer Recommended:</strong> High EMI utilization detected. A BT on eligible loans could lower your monthly payments and improve overall eligibility.</div>`;
+                const foirUtilization = Math.round((result.totalExistingEMI / result.maxFOIRAmount) * 100);
+                btMessagePDF = `<div style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; border-radius: 8px; margin-bottom: 25px; color: #b45309; font-size: 14px;"><strong>Balance Transfer Recommended:</strong> High EMI utilization detected (${foirUtilization}%). A BT on eligible loans (${formatCurrency(result.btOutstanding)}) could lower your monthly payments and improve overall eligibility.</div>`;
             }
 
-            const finalEligibleODAmount = result.cappedODAmount !== null ? Math.min(result.maxEligibleLoanAmount, result.cappedODAmount) : result.maxEligibleLoanAmount;
-            const isODCapped = result.cappedODAmount !== null && result.maxEligibleLoanAmount > result.cappedODAmount;
-
-            let eligibilityGridHTML = `
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
-                    <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border-left: 3px solid #667eea;">
-                        <div style="color: #64748b; font-size: 14px;">Max FOIR Amount</div>
-                        <div style="color: #0f172a; font-size: 20px; font-weight: bold; margin-top: 5px;">${formatCurrency(result.maxFOIRAmount)}</div>
-                    </div>
-                    <div style="background: #fef3c7; padding: 15px; border-radius: 8px; border-left: 3px solid #f59e0b;">
-                        <div style="color: #64748b; font-size: 14px;">Total Obligated EMI</div>
-                        <div style="color: #0f172a; font-size: 20px; font-weight: bold; margin-top: 5px;">${formatCurrency(result.totalExistingEMI)}</div>
-                    </div>
-                    <div style="background: #d1fae5; padding: 15px; border-radius: 8px; border-left: 3px solid #10b981;">
-                        <div style="color: #64748b; font-size: 14px;">Available EMI</div>
-                        <div style="color: #0f172a; font-size: 20px; font-weight: bold; margin-top: 5px;">${formatCurrency(result.availableEMI)}</div>
-                    </div>
-                    <div style="background: #e0e7ff; padding: 15px; border-radius: 8px; border-left: 3px solid #6366f1;">
-                        <div style="color: #64748b; font-size: 14px;">Max Eligible Personal/Business Loan</div>
-                        <div style="color: #0f172a; font-size: 20px; font-weight: bold; margin-top: 5px;">${formatCurrency(result.maxEligibleLoanAmount)}</div>
-                    </div>
-            `;
-
-            if (isODCapped) {
-                eligibilityGridHTML += `
-                    <div style="background: #fef3c7; padding: 15px; border-radius: 8px; border-left: 3px solid #f59e0b;">
-                        <div style="color: #b45309; font-size: 14px;">Max Eligible OD Limit (Capped)</div>
-                        <div style="color: #b45309; font-size: 20px; font-weight: bold; margin-top: 5px;">${formatCurrency(finalEligibleODAmount)}</div>
-                    </div>
-                `;
-            } else if (result.eligibilityResults.odLimit.length > 0) {
-                eligibilityGridHTML += `
-                    <div style="background: #e0e7ff; padding: 15px; border-radius: 8px; border-left: 3px solid #6366f1;">
-                        <div style="color: #64748b; font-size: 14px;">Max Eligible OD Limit</div>
-                        <div style="color: #0f172a; font-size: 20px; font-weight: bold; margin-top: 5px;">${formatCurrency(finalEligibleODAmount)}</div>
-                    </div>
-                `;
+            let warningsPDF = '';
+            if (result.validationWarnings && result.validationWarnings.length > 0) {
+                warningsPDF = `<div style="background: #fff7ed; border-left: 4px solid #f97316; padding: 15px; border-radius: 8px; margin-bottom: 25px; color: #c2410c; font-size: 14px;"><strong>Important Considerations:</strong><ul style="margin: 10px 0 0 20px;">${result.validationWarnings.map(w => `<li>${w.message}</li>`).join('')}</ul></div>`;
             }
-            eligibilityGridHTML += `</div>`;
-
 
             return `
                 <div id="pdfContent" style="font-family: 'Inter', 'Space Grotesk', Arial, sans-serif; padding: 20px; background: white;">
@@ -2244,6 +2300,7 @@
                     </div>
 
                     ${btMessagePDF}
+                    ${warningsPDF}
 
                     <div style="margin-bottom: 25px;">
                         <h3 style="color: #334155; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 15px;">Customer Information</h3>
@@ -2265,7 +2322,33 @@
 
                     <div style="margin-bottom: 25px;">
                         <h3 style="color: #334155; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 15px;">Eligibility Calculation</h3>
-                        ${eligibilityGridHTML}
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                            <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border-left: 3px solid #667eea;">
+                                <div style="color: #64748b; font-size: 14px;">Max FOIR Amount</div>
+                                <div style="color: #0f172a; font-size: 20px; font-weight: bold; margin-top: 5px;">${formatCurrency(result.maxFOIRAmount)}</div>
+                            </div>
+                            <div style="background: #fef3c7; padding: 15px; border-radius: 8px; border-left: 3px solid #f59e0b;">
+                                <div style="color: #64748b; font-size: 14px;">Total Obligated EMI</div>
+                                <div style="color: #0f172a; font-size: 20px; font-weight: bold; margin-top: 5px;">${formatCurrency(result.totalExistingEMI)}</div>
+                            </div>
+                            <div style="background: #d1fae5; padding: 15px; border-radius: 8px; border-left: 3px solid #10b981;">
+                                <div style="color: #64748b; font-size: 14px;">Available EMI</div>
+                                <div style="color: #0f172a; font-size: 20px; font-weight: bold; margin-top: 5px;">${formatCurrency(result.availableEMI)}</div>
+                            </div>
+                            <div style="background: #e0e7ff; padding: 15px; border-radius: 8px; border-left: 3px solid #6366f1;">
+                                <div style="color: #64748b; font-size: 14px;">Max Eligible Loan</div>
+                                <div style="color: #0f172a; font-size: 20px; font-weight: bold; margin-top: 5px;">${formatCurrency(result.maxEligibleLoanAmount)}</div>
+                            </div>
+                            <div style="background: #fef3c7; padding: 15px; border-radius: 8px; border-left: 3px solid #f59e0b;">
+                                <div style="color: #64748b; font-size: 14px;">Total Outstanding</div>
+                                <div style="color: #0f172a; font-size: 20px; font-weight: bold; margin-top: 5px;">${formatCurrency(result.totalOutstanding)}</div>
+                            </div>
+                            ${result.btOutstanding > 0 ? `
+                            <div style="background: #d1fae5; padding: 15px; border-radius: 8px; border-left: 3px solid #10b981;">
+                                <div style="color: #64748b; font-size: 14px;">BT Eligible Outstanding</div>
+                                <div style="color: #0f172a; font-size: 20px; font-weight: bold; margin-top: 5px;">${formatCurrency(result.btOutstanding)}</div>
+                            </div>` : ''}
+                        </div>
                     </div>
 
                     ${eligibleProducts.length > 0 ? `
@@ -2340,14 +2423,11 @@
                 window.currentEligibilityResult
             );
 
-            // Replace the modal's content with the detailed report view
             byId('modalContent').innerHTML = reportHTML;
-            // Rename the content div to avoid confusion if the button is clicked multiple times
             byId('modalContent').firstElementChild.id = 'pdfContent';
         }
 
         function downloadPDF() {
-            // The content to be captured for the PDF is now consistently named 'pdfContent'
             const element = byId('pdfContent');
             if (!element) {
                 alert('Please generate the PDF report first by clicking "Generate PDF Report".');
@@ -2363,7 +2443,7 @@
 
             html2canvas(element, {
                 scale: 2,
-                useCORS: true, // Essential for external images
+                useCORS: true,
                 allowTaint: true,
                 logging: false,
                 windowWidth: element.scrollWidth,
@@ -2375,17 +2455,17 @@
 
                     const pageWidth = pdf.internal.pageSize.getWidth();
                     const pageHeight = pdf.internal.pageSize.getHeight();
-                    const imgWidth = pageWidth - 20; // Margin
+                    const imgWidth = pageWidth - 20;
                     const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
                     let heightLeft = imgHeight;
-                    let position = 10; // Top margin
+                    let position = 10;
 
                     pdf.addImage(imgData, 'JPEG', 10, position, imgWidth, imgHeight);
                     heightLeft -= (pageHeight - 20);
 
                     while (heightLeft > 0) {
-                        position = heightLeft - imgHeight + 10; // Adjust position for subsequent pages
+                        position = heightLeft - imgHeight + 10;
                         pdf.addPage();
                         pdf.addImage(imgData, 'JPEG', 10, position, imgWidth, imgHeight);
                         heightLeft -= pageHeight;
@@ -2398,12 +2478,11 @@
                 hideLoading();
             }).catch(error => {
                 console.error('PDF generation error:', error);
-                alert('Failed to generate PDF. The logo image might be causing an issue. Please try again.');
+                alert('Failed to generate PDF. Please try again.');
                 hideLoading();
             });
         }
 
-        // Reset Form Function
         function resetForm() {
             if (confirm('Are you sure you want to reset all data?')) {
                 calculationCompleted = false;
@@ -2411,7 +2490,6 @@
             }
         }
 
-        // Initialize everything when page loads
         window.addEventListener('load', () => {
             if (!window.jsPDF && window.jspdf && window.jspdf.jsPDF) {
                 window.jsPDF = window.jspdf.jsPDF;
